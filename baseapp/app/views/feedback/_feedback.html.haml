@@ -1,0 +1,35 @@
+/ Button trigger modal
+%button.btn.btn-primary{"data-target" => "#feedback-mailer--modal", "data-toggle" => "modal", :type => "button"}
+  Feedback
+/ Modal
+#feedback-mailer--modal.modal.fade.bd-example-modal-md{"aria-hidden" => "true", "aria-labelledby" => "feedback-mailer--modalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-md{:role => "document"}
+    .modal-content
+      .modal-header
+        %h4.modal-title Submit Your Feedback
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        = form_with model: @feedback do |f|
+          .form-group
+            = notice
+            = @feedback.errors.full_messages.join(', ')
+          .form-group
+            = f.label :full_name, 'Full name', :class => "control-label"
+            #form_div
+              = f.text_field :full_name, placeholder: 'Full Name'
+          .form-group
+            = f.label :email, 'eMail', :class => "control-label"
+            #form_div
+              = f.email_field :email, placeholder: 'email@somewhere.com', required: true
+          .form-group
+            = f.label :topic, 'Topic', :class => "control-label"
+            #form_div
+              = f.select(:topic, options_for_select([['I have some feedback...','feedback'],['I have a question...', 'question'],['I have a feature request...','feature'],['I’d like to report a bug...','bug'],['Other','other']],1))
+          .form-group
+            = f.label :comment, 'Comment', :class => "control-label"
+            #form_div
+              = f.text_area :comment, placeholder: 'Comment', required: true
+          .form-group
+            #form_div
+              = f.submit :submit, :class => "btn btn-success"

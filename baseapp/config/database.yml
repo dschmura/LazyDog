@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  database: app_name_development
+
+test:
+  <<: *default
+  database: app_name_test
+
+staging:
+  <<: *default
+  database: app_name_staging
+  username: <%= Rails.application.credentials.STAGING_DB_USERNAME %>
+  password: <%= Rails.application.credentials.STAGING_DB_PASSWORD %>
+
+production:
+  <<: *default
+  database: app_name_production
+  username: <%= Rails.application.credentials.PRODUCTION_DB_USERNAME %>
+  password: <%= Rails.application.credentials.PRODUCTION_DB_PASSWORD %>

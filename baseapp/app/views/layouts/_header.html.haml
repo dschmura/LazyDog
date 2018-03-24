@@ -1,0 +1,16 @@
+%header
+  / Navigation
+  %nav#mainNav.navbar.fixed-top.navbar-expand-md.navbar-dark.bg-dark.mb-4
+    %button.navbar-toggler{"aria-controls" => "navbarCollapse", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarCollapse", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarCollapse.collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto.text-uppercase
+        %li.nav-item
+          = link_to image_tag(asset_pack_path('app_name/images/app_name_logo.gif'), alt: "#{(t :sitename)} Logo, link to home page.", class: 'navbar-brand navbar-logo', id: root_path(anchor: 'page-top')), root_path
+          %span.sr-only (current)
+
+      .nav.my-2.my-md-0
+        %ul.navbar-nav.text-uppercase.ml-auto
+          %li.nav-item= link_to "About", about_path, class:"nav-link"
+          %li.nav-item= link_to "Contact Us", contact_path, class:"nav-link"
+          %li.nav-item= link_to "Privacy", privacy_path, class:"nav-link"

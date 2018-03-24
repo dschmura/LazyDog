@@ -1,0 +1,70 @@
+append_to_file "app/webpacker/#{app_name}/stylesheets/_variables.sass" do
+  <<-SASS
+  $matthaei-violet: #575294
+  $ann-arbor-amethyst: #702490
+  $rackham-roof-green: #83b2a8
+  $taubman-teal: #00b2b1
+  $40658f: #40658f
+  $465d85: #465d85
+  $0257aa: #0257aa
+  $027494: #027494
+  $002a5b: #002a5b
+  $canham-pool-blue: #587abc
+  $arboretum-blue: #006ab8
+  $wave-field-green: #bab500
+  $ross-school-orange: #ec8000
+  $lsa-orange: #cc6600
+  $e5e5e5: #e5e5e5
+  $eff0f1: #eff0f1
+  $886b01: #886b01
+  $observatory-white: #e4e1df
+  $umma-tan: #cfc096
+  $burton-towen-beige: #9b9a6d
+  $archway-ivy: #7e732f
+  $hill-brown: #7a121c
+  $tappan-red: #b51e0a
+  $dark-grey: #555555
+  $mine-shaft: #333333
+  $angell-hall-ash: #a79d96
+  $the-rock-gray: #989c97
+  $law-quad-stone: #655a52
+  $puma-black: #111b23
+  $u-m-maize: #ffcb05
+  $u-m-blue: #00274c
+  SASS
+end
+
+$spring-term-green: #00743c
+$huron-river-green: #0c5832
+$south-forest-green: #18453b
+$matthaei-violet: #575294
+$ann-arbor-amethyst: #702490
+$rackham-roof-green: #48736a
+$taubman-teal: #007474
+$40658f: #40658f
+$465d85: #465d85
+$0257aa: #0257aa
+$027494: #027494
+$002a5b: #002a5b
+$canham-pool-blue: #4568ae
+$arboretum-blue: #006ab8
+$wave-field-green: #797500
+$lsa-orange: #ac5600
+$ross-school-orange: #ac5f00
+$6f767a: #6f767a
+$6a6a6a: #6a6a6a
+$886b01: #886b01
+$observatory-white: #6d675e
+$umma-tan: #766536
+$burton-tower-beige: #797852
+$archway-ivy: #7e732f
+$hill-brown: #78131e
+$tappan-red: #b51e0a
+$dark-gray: #555555
+$mine-shaft: #333333
+$angell-hall-ash: #7a6e66
+$the-rock-gray: #6a6d68
+$law-quad-stone: #655a52
+$u-m-blue: #00274c
+$u-m-maize: #ffcb05
+$puma-black: #111b23
