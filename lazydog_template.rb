@@ -48,19 +48,19 @@ def add_webpack
 end
 
 def add_sidekiq
-  environment "config.active_job.queue_adapter = :sidekiq"
-
-  insert_into_file "config/routes.rb",
-    "require 'sidekiq/web'\n\n",
-    before: "Rails.application.routes.draw do"
-
-  insert_into_file "config/routes.rb",
-    "  authenticate :user, lambda { |u| u.admin? } do\n    mount Sidekiq::Web => '/sidekiq'\n  end\n\n",
-    after: "Rails.application.routes.draw do\n"
+  # environment "config.active_job.queue_adapter = :sidekiq"
+  #
+  # insert_into_file "config/routes.rb",
+  #   "require 'sidekiq/web'\n\n",
+  #   before: "Rails.application.routes.draw do"
+  #
+  # insert_into_file "config/routes.rb",
+  #   "  authenticate :user, lambda { |u| u.admin? } do\n    mount Sidekiq::Web => '/sidekiq'\n  end\n\n",
+  #   after: "Rails.application.routes.draw do\n"
 end
 
 def add_feedback_mailer
-  # load_template('add_feedback_mailer.rb')
+  load_template('add_feedback_mailer.rb')
 end
 
 def add_notifications
@@ -99,6 +99,7 @@ def customize_configs
   gsub_file 'config/database.yml', 'app_name', "#{app_name}"
   gsub_file 'config/puma.sample.rb', 'app_name', "#{app_name}"
   gsub_file 'config/nginx.sample.conf', 'app_name', "#{app_name}"
+  gsub_file 'config/deploy.rb', 'app_name', "#{app_name}"
   gsub_file 'config/deploy/production.rb', 'PRODUCTION_SERVER_IP', "#{app_name}.com"
   gsub_file 'config/deploy/staging.rb', 'STAGING_SERVER_IP', "#{app_name}.com"
   gsub_file 'config/locales/en.yml', /  hello: "Hello world"/ do
@@ -143,7 +144,7 @@ after_bundle do
   add_users
   add_bootstrap
   add_rails_flash_messages
-  # add_sidekiq
+  add_sidekiq
   add_webpack
   # add_announcements
   # add_notifications
@@ -158,9 +159,12 @@ after_bundle do
   add_favicon_and_logo
   config_missing_translations
 
+  rails_command 'bundle'
+  rails_command 'yarn install'
   # Migrate
-  rails_command "db:create"
-  rails_command "db:migrate"
+  rails_command 'rake db:setup'
+  # rails_command "db:create"
+  # rails_command "db:migrate"
 
   # Migrations must be done before this
   add_administrate
