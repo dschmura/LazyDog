@@ -14,7 +14,7 @@
     "popper.js": "^1.14.1",
     "rails-ujs": "^5.1.5",
     "stimulus": "^1.0.1",
-    "turbolinks": "^5.1.1",
+    "turbolinks": "^5.1.1"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"

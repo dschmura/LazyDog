@@ -11,6 +11,7 @@
   set :stage,           :production
   set :deploy_via,      :remote_cache
   set :deploy_to,       "/home/#{fetch(:user)}/apps/app_name"
+  # Puma specific settings
   set :puma_bind,       "unix://#{shared_path}/tmp/sockets/app_name-puma.sock"
   set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
   set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
@@ -21,6 +22,10 @@
   set :puma_worker_timeout, nil
   set :puma_init_active_record, true  # Change to false when not using ActiveRecord
   set :nginx_sites_enabled_path, "/etc/nginx/sites-enabled"
+
+  # Rbenv specific settings
+  set :rbenv_ruby, File.read('.ruby-version').strip
+  set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 
   namespace :puma do
     desc 'Create Directories for Puma Pids and Socket'
