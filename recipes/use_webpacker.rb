@@ -19,7 +19,7 @@ insert_into_file 'config/application.rb', after: 'config.load_defaults 5.2' do
 
 end
 
-run 'mv app/javascript app/webpacker'
+run 'rm -rf app/javascript'
 
 gsub_file('config/webpacker.yml',  'source_path: app/javascript', 'source_path: app/webpacker')
 
