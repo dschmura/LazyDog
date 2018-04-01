@@ -115,6 +115,11 @@ def run_certbot
   # is this a template concern or a deployment rake task?
 end
 
+def convert_to_haml
+  rails_command('haml:replace_erbs')
+  run 'rm -rf app/views/'
+end
+
 def config_missing_translations
   # RAISE ERROR IF TRANSLATION IS MISSING (ie: site_name)
   insert_into_file 'config/environments/development.rb', after: 'config.eager_load = false' do
@@ -153,6 +158,7 @@ after_bundle do
   # add_administrate
   add_capistrano
   add_rspec
+  convert_to_haml
   add_static_pages
   copy_templates
   customize_configs
