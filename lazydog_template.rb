@@ -93,7 +93,7 @@ def add_administrate
 end
 
 def customize_configs
-  run 'mv app/webpacker/'
+  run "mv app/webpacker/app_name app/webpacker/#{app_name}"
   gsub_file 'package.json', 'app_name', "#{app_name}"
   gsub_file 'app/webpacker/packs/application.js', 'app_name', "#{app_name}"
   gsub_file 'config/database.yml', 'app_name', "#{app_name}"
