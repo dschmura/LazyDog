@@ -102,7 +102,7 @@ def customize_configs
   gsub_file 'config/deploy.rb', 'app_name', "#{app_name}"
   gsub_file 'config/deploy/production.rb', 'PRODUCTION_SERVER_IP', "#{app_name}.com"
   gsub_file 'config/deploy/staging.rb', 'STAGING_SERVER_IP', "#{app_name}.com"
-  gsub_file 'config/locales/en.yml', /  hello: "Hello world"/ do
+  gsub_file 'config/locales/en.yml', "hello: \"Hello world\"", "sitename: \"#{app_name}\""
 
   run "mv app/webpacker/app_name app/webpacker/#{app_name}"
     <<-YAML
