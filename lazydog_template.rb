@@ -39,7 +39,7 @@ def copy_templates
 
   copy_file '../baseapp/Capfile', 'Capfile', force: true
   copy_file '../baseapp/Gemfile', 'Gemfile', force: true
-  copy_file '../baseapp/package.json', 'package.json', force: true
+  # copy_file '../baseapp/package.json', 'package.json', force: true
   copy_file '../baseapp/Procfile', 'Procfile'
 end
 
