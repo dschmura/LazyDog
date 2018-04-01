@@ -159,13 +159,7 @@ after_bundle do
   add_favicon_and_logo
   config_missing_translations
 
-  rails_command 'bundle'
-  rails_command 'yarn install'
-  # Migrate
-  rails_command 'rake db:setup'
-  # rails_command "db:create"
-  # rails_command "db:migrate"
-
+  run 'bin/setup'
   # Migrations must be done before this
   add_administrate
 
