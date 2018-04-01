@@ -106,6 +106,10 @@ def customize_configs
   gsub_file 'bin/setup', "# system('bin/yarn')", "system('bin/yarn')"
 
 end
+
+def update_app_name
+  puts Dir.pwd
+  Dir.glob("app/**/*.*")  {|filename| gsub_file filename, 'app_name', "#{app_name}" }
 end
 
 def run_certbot
@@ -159,6 +163,7 @@ after_bundle do
   add_static_pages
   copy_templates
   customize_configs
+  update_app_name
   add_favicon_and_logo
   config_missing_translations
 
