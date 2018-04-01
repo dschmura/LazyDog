@@ -145,6 +145,7 @@ end
 
 # Main setup
 # add_gems
+copy_file '../baseapp/Gemfile', 'Gemfile', force: true
 run 'bundle install'
 after_bundle do
   add_users
