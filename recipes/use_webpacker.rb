@@ -25,4 +25,4 @@ gsub_file('config/webpacker.yml',  'source_path: app/javascript', 'source_path: 
 
 run 'yarn add rails-ujs turbolinks jquery stimulus bourbon bootstrap babili popper.js @fortawesome/fontawesome @fortawesome/fontawesome-free-solid @fortawesome/fontawesome-free-regular @fortawesome/fontawesome-free-brands'
 
-run 'yarn add webpack-cli -D'
+run 'yarn add webpack-cli webpack-dev-server@2.9.5 -D'
