@@ -110,6 +110,7 @@ end
 def update_app_name
   puts Dir.pwd
   Dir.glob("app/**/*.*")  {|filename| gsub_file filename, 'app_name', "#{app_name}" }
+  Dir.glob("config/**/*.*")  {|filename| gsub_file filename, 'app_name', "#{app_name}" }
 end
 
 def run_certbot
