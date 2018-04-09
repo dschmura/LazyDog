@@ -103,6 +103,7 @@ def customize_configs
   gsub_file 'config/deploy/production.rb', 'PRODUCTION_SERVER_IP', "#{app_name}.com"
   gsub_file 'config/deploy/staging.rb', 'STAGING_SERVER_IP', "#{app_name}.com"
   gsub_file 'config/locales/en.yml', "hello: \"Hello world\"", "sitename: \"#{app_name}\""
+  gsub_file 'config/environments/production.rb', 'config.assets.js_compressor = :uglifier', '# config.assets.js_compressor = :uglifier'
   gsub_file 'bin/setup', "# system('bin/yarn')", "system('bin/yarn')"
 
 end
