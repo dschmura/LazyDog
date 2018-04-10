@@ -82,11 +82,12 @@ def add_capistrano
 end
 
 def add_static_pages
-  generate(:controller, "Pages index about contact privacy")
+  generate(:controller, "Pages index about contact privacy project_status")
   route "root to: 'pages#index'"
   route "get '/about', to: 'pages#about'"
   route "get '/contact', to: 'pages#contact'"
   route "get '/privacy', to: 'pages#privacy'"
+  route "get '/project_status', to: 'pages#project_status'"
 end
 
 def add_administrate

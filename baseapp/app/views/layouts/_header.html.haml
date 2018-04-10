@@ -7,6 +7,7 @@
       %ul.navbar-nav.mr-auto.text-uppercase
         %li.nav-item
           = link_to image_tag(asset_pack_path('app_name/images/app_name_logo.png'), alt: "#{(t :sitename)} Logo, link to home page.", class: 'navbar-brand navbar-logo', id: root_path(anchor: 'page-top')), root_path
+          = link_to((t :sitename), root_path, class: 'navbar-brand navbar-logo', id: root_path(anchor: 'page-top') )
           %span.sr-only (current)
 
       .nav.my-2.my-md-0
