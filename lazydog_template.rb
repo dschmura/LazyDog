@@ -94,9 +94,9 @@ def add_administrate
 end
 
 def customize_configs
-  run "mv app/webpacker/app_name app/webpacker/#{app_name}"
-  gsub_file 'package.json', 'app_name', "#{app_name}"
-  gsub_file 'app/webpacker/packs/application.js', 'app_name', "#{app_name}"
+  run "mv app/javascript/app_name app/javascript/#{app_name}"
+  # gsub_file 'package.json', 'app_name', "#{app_name}"
+  gsub_file 'app/javascript/packs/application.js', 'app_name', "#{app_name}"
   gsub_file 'config/database.yml', 'app_name', "#{app_name}"
   gsub_file 'config/puma.sample.rb', 'app_name', "#{app_name}"
   gsub_file 'config/nginx.sample.conf', 'app_name', "#{app_name}"
@@ -105,7 +105,7 @@ def customize_configs
   gsub_file 'config/deploy/staging.rb', 'STAGING_SERVER_IP', "#{app_name}.com"
   gsub_file 'config/locales/en.yml', "hello: \"Hello world\"", "sitename: \"#{app_name}\""
   gsub_file 'config/environments/production.rb', 'config.assets.js_compressor = :uglifier', '# config.assets.js_compressor = :uglifier'
-  gsub_file 'bin/setup', "# system('bin/yarn')", "system('bin/yarn')"
+  # gsub_file 'bin/setup', "# system('bin/yarn')", "system('bin/yarn')"
 
 end
 

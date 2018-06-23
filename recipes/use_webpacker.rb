@@ -19,10 +19,10 @@ insert_into_file 'config/application.rb', after: 'config.load_defaults 5.2' do
 
 end
 
-run 'rm -rf app/javascript'
+# run 'rm -rf app/javascript'
 
-gsub_file('config/webpacker.yml',  'source_path: app/javascript', 'source_path: app/webpacker')
+# gsub_file('config/webpacker.yml',  'source_path: app/javascript', 'source_path: app/webpacker')
 
 run 'yarn add rails-ujs turbolinks jquery stimulus bourbon bootstrap babili popper.js @fortawesome/fontawesome @fortawesome/fontawesome-free-solid @fortawesome/fontawesome-free-regular @fortawesome/fontawesome-free-brands'
 
-run 'yarn add webpack-cli webpack-dev-server@2.9.5 -D'
+# run 'yarn add webpack-cli webpack-dev-server@2.9.5 -D'

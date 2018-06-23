@@ -2,9 +2,9 @@
 # Requires faviator be installed. To install run;
 # npm install -g faviator
 
-run ("faviator --size '230' --text #{app_name[0].upcase} --dx '-5' --dy '2' --font-size '70' --font-family 'Pacifico' --font-color '#ffffff' --background-color '#465D85' --border-width '3.5' --border-color '#97ABBF' --border-radius '50' --output app/webpacker/#{app_name}/images/favicon.png")
+run ("faviator --size '230' --text #{app_name[0].upcase} --dx '-5' --dy '2' --font-size '70' --font-family 'Pacifico' --font-color '#ffffff' --background-color '#465D85' --border-width '3.5' --border-color '#97ABBF' --border-radius '50' --output app/javascript/#{app_name}/images/favicon.png")
 
-run ("faviator --size '230' --text #{app_name[0].upcase} --dx '-5' --dy '2' --font-size '70' --font-family 'Pacifico' --font-color '#ffffff' --background-color '#465D85' --border-width '3.5' --border-color '#97ABBF' --border-radius '50' --output app/webpacker/#{app_name}/images/#{app_name}_logo.png")
+run ("faviator --size '230' --text #{app_name[0].upcase} --dx '-5' --dy '2' --font-size '70' --font-family 'Pacifico' --font-color '#ffffff' --background-color '#465D85' --border-width '3.5' --border-color '#97ABBF' --border-radius '50' --output app/javascript/#{app_name}/images/#{app_name}_logo.png")
 
 append_to_file 'app/views/layouts/application.html.haml', after: '%title= page_title' do
   <<-FAVICON
