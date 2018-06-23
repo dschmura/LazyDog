@@ -2,7 +2,10 @@
 LazyDog is my latest dive into creating a rails template that sets things up just so...
 
 # Getting Started:
-
+If you want to use this template permanently, add the following to your ~/.railsrc file
+```
+--template=~/code/Rails/TEMPLATES/LazyDog/lazydog_template.rb
+```
 ## Initial deployment
 
 ### Set up credentials
