@@ -1,5 +1,5 @@
-  // // Include external resources for this app_files
-  import 'bootstrap'
+  // Include external resources for this app_files
+  // import 'bootstrap'
 
   // Include internal resources for this app
   import './javascripts/application'
