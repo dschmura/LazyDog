@@ -6,14 +6,17 @@
     = csrf_meta_tags
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
   %body
     .container#page-top
-
-      .corner-ribbon.top-right.sticky.red.shadow= link_to('Work in Progress', project_status_path)
-
+      - unless Rails.env.production?
+        .corner-ribbon.top-right.sticky.red.shadow= link_to('Work in Progress', project_status_path)
 
       = render 'layouts/header'
+
       .content#content{:class => controller.controller_name}
         = yield
+
       = debug(params) if Rails.env.development?
+
       = render 'layouts/footer'
