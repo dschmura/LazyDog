@@ -3,6 +3,8 @@
 # https://lsa.umich.edu/content/dam/lsa-site-assets/images/images/logos-colors/LSA-Dept-color-palette-options.png
 prepend_to_file "app/javascript/#{app_name}/stylesheets/_variables.sass" do
 <<-SASS
+// BEGIN OF UMICH RECOMMENDED COLORS AND FONTS
+
 $angell_hall_ash: #a79d96
 $ann_arbor_amethyst: #702490
 $arboretum_blue: #006ab8
@@ -52,5 +54,8 @@ $lucida_grande: 'Lucida Grande'
 // web specific
 $verdana: 'Verdana'
 $tahoma: 'Tahoma'
+
+// END OF UMICH RECOMMENDED COLORS AND FONTS
+
 SASS
 end

@@ -173,7 +173,9 @@ after_bundle do
   customize_configs
   update_app_name
   add_favicon_and_logo
-  add_umich_colors
+  if yes? 'Do you want to add the Official UM color variables? (y/n)'
+    add_umich_colors
+  end
   config_missing_translations
 
   run 'bin/setup'
