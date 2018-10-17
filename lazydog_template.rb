@@ -146,6 +146,10 @@ def add_favicon_and_logo
   load_template('create_favicon.rb')
 end
 
+def add_umich_colors
+  load_template('use_umich_colors.rb')
+end
+
 # Main setup
 # add_gems
 copy_file '../baseapp/Gemfile', 'Gemfile', force: true
@@ -169,6 +173,7 @@ after_bundle do
   customize_configs
   update_app_name
   add_favicon_and_logo
+  add_umich_colors
   config_missing_translations
 
   run 'bin/setup'
