@@ -147,7 +147,7 @@ def add_favicon_and_logo
 end
 
 def add_umich_colors
-  load_template('use_umich_colors')
+  load_template('use_umich_colors.rb')
 end
 
 # Main setup
