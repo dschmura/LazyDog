@@ -150,6 +150,10 @@ def add_umich_colors
   load_template('use_umich_colors.rb')
 end
 
+def add_clear_dev_logs_initializer
+  load_template('clear_dev_logs.rb')
+end
+
 # Main setup
 # add_gems
 copy_file '../baseapp/Gemfile', 'Gemfile', force: true
@@ -180,8 +184,9 @@ after_bundle do
 
   run 'bin/setup'
   # Migrations must be done before this
-  add_administrate
-
+  # add_administrate
+  add_clear_dev_logs_initializer
+  
   git :init
   append_to_file '.gitignore' do ".DS_Store" end
   git add: "."
