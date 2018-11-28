@@ -18,11 +18,11 @@ insert_into_file 'config/application.rb', after: 'config.load_defaults 5.2' do
 
 end
 
-run 'yarn add @rails/webpacker@~4.19.1'
-run 'yarn add webpack-cli'
+run 'yarn add @rails/webpacker@^4.0.0-pre.3 webpack-cli rails-ujs turbolinks stimulus babel-minify'
+
 run 'yarn upgrade webpack-dev-server --latest'
 # run 'yarn install'
-run 'yarn add rails-ujs turbolinks stimulus babel-minify'
+# run 'yarn add rails-ujs turbolinks stimulus babel-minify'
 # run 'yarn add rails-ujs turbolinks jquery stimulus bourbon bootstrap babel-minify popper.js @fortawesome/fontawesome @fortawesome/fontawesome-free-solid @fortawesome/fontawesome-free-regular @fortawesome/fontawesome-free-brands'
 
 
@@ -32,3 +32,14 @@ run 'yarn add rails-ujs turbolinks stimulus babel-minify'
 # yarn add @fortawesome/fontawesome-free-brands
 # add a staging environment in config/webpacker.yml
 # update version of node on server
+
+append_to_file 'config/webpack/environment.js' do
+  <--POSTCSS_LOADER
+const path = require("path")
+Object.assign(environment.loaders.get("css").use.find(el => el.loader === "postcss-loader").options, {
+  config: {
+    path: path.resolve(__dirname, "../..", ".postcssrc.yml")
+  }
+})
+POSTCSS_LOADER
+end
