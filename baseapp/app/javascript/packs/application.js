@@ -19,3 +19,7 @@
 
   // Specific frontend applications
   import 'app_name'
+
+  document.addEventListener('turbolinks:load', () => {
+    // FontAwesome.dom.i2svg();
+  })
