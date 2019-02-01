@@ -1,0 +1,56 @@
+#error-explanation
+  @apply bg-blue-lighter text-blue-dark my-1 rounded font-light
+
+  h2
+    @apply bg-red-lighter text-red-dark p-3 rounded-t font-light
+  .error-message
+    @apply text-2xl list-reset leading-loose
+
+.flash-messages
+  @apply bg-grey-lighter text-3xl mt-6 mb-4
+
+.alert
+  @apply border-t-4 rounded-b px-4 py-12 h-12 shadow-md flex relative
+
+  .alert-close
+    @apply absolute pin-t pin-b pin-r px-2 py-1 no-underline text-2xl
+    &:hover
+      @apply cursor-pointer
+    svg
+      @apply text-sm
+
+.alert-severity
+  @apply mr-2 pr-2 text-3xl w-48 border-r-4
+  svg
+    @apply mx-2
+
+.alert-message
+  @apply w-2/3 block
+  @screen sm
+    @apply inline
+
+.alert-edit
+  @apply absolute pin-t pin-r px-2 py-1 mr-6 text-grey-darkest
+
+  // COLOR VARIATIONS
+.alert-danger
+  @apply bg-red-lighter text-red-darker border-red p-1 mb-2
+  .alert-severity,
+  .alert-close
+    @apply border-red text-red-darker
+.alert-error
+  @apply bg-yellow-dark text-yellow-darker border-yellow p-1 mb-2
+  .alert-severity
+    @apply border-yellow
+.alert-notice
+  @apply bg-blue-lighter text-blue-darker border-blue p-1 mb-2
+  .alert-severity
+    @apply border-blue
+.alert-success
+  @apply bg-green-lighter text-green-darker border-green p-1 mb-2
+  .alert-severity
+    @apply border-green
+.alert-warning
+  @apply bg-orange-lighter text-orange-darker border-orange p-1 mb-2
+  .alert-severity
+    @apply border-orange
