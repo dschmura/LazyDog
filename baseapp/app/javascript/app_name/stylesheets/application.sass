@@ -1,34 +1,28 @@
-// @import '~bootstrap/scss/functions'
-// @import '~bootstrap/scss/bootstrap'
 @import 'variables'
+
+@tailwind preflight
+@tailwind components
+@tailwind utilities
 
 .modal-backdrop
   z-index: -1 !important
-
 // You Forgot The Alt Message
-img[alt=""], img:not([alt])
+img[alt=""] img:not([alt])
   border: 5px dashed #c00
 
-.container
-  display: grid
-  grid-template-areas: 'header header' 'content' 'debug' 'footer'
-  grid-template-columns: repeat(12, 1fr)
-  grid-template-rows: auto 1fr auto 75px
-  height: 100vh
-  margin: 0 -1.1rem 0 -1rem
-  font-family: $font-family-base
-
+body
+  @apply flex flex-col h-full
 .content
-  grid-column: span 12
-  padding:  0 1rem
+  @apply  px-6 py-4 mx-auto -mt-6
 
 .debug_dump
-  grid-column: span 12
-  height: 125px
-  max-height: auto
-  border-radius: 1rem
-  padding: 1rem
-  clear: both
-  float: left
-  margin: 15px
-  background-color: transparentize(grey, 0.3)
+  @apply bg-grey-lighter border border-red-dark rounded-lg p-2 w-2/3 mx-auto
+
+/*! debug.css | MIT License | https://gist.github.com/zaydek/6b2e55258734deabbd2b4a284321d6f6 */
+// To use add a {:debug => ""} to any element you want to understand better
+[debug], [debug] *:not(g):not(path)
+	color:hsla(210, 100%, 100%, 0.9) !important
+	background: hsla(210, 100%,  50%, 0.5) !important
+	outline: solid 0.25rem hsla(210, 100%, 100%, 0.5) !important
+	box-shadow: none !important
+	filter:     none !impor
