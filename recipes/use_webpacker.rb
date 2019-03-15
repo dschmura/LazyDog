@@ -12,7 +12,7 @@ insert_into_file 'config/application.rb', after: 'config.load_defaults 5.2' do
 
 end
 
-run 'yarn add @rails/webpacker@^4.0.0-rc.7 webpack-cli rails-ujs turbolinks stimulus @fortawesome/fontawesome-free tailwindcss'
+run 'yarn add @rails/webpacker@^4.0.0-rc.7 webpack-cli rails-ujs turbolinks stimulus @fortawesome/fontawesome-free'
 
 run 'yarn upgrade webpack-dev-server --latest'
 # run 'yarn install'

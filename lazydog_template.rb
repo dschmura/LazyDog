@@ -154,6 +154,9 @@ def add_clear_dev_logs_initializer
   load_template('clear_dev_logs.rb')
 end
 
+def use_tailwindcss
+  load_template('use_tailwindcss.rb')
+end
 # Main setup
 # add_gems
 copy_file '../baseapp/Gemfile', 'Gemfile', force: true
@@ -175,6 +178,7 @@ after_bundle do
   add_static_pages
   copy_templates
   customize_configs
+  use_tailwindcss
   update_app_name
   add_favicon_and_logo
   if yes? 'Do you want to add the Official UM color variables? (y/n)'
@@ -186,12 +190,12 @@ after_bundle do
   # Migrations must be done before this
   # add_administrate
   add_clear_dev_logs_initializer
-  
+
   git :init
   append_to_file '.gitignore' do ".DS_Store" end
   git add: "."
   git commit: %Q{ -m 'Initial Commit' }
   # Create respitory on github. This requires Hub [https://github.com/github/hub]
   # run 'git create'
-  run 'atom .'
+  run 'vsc .'
 end
