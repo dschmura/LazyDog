@@ -1,9 +1,3 @@
-file '.browserlistrc'
-append_to_file '.browserlistrc' do
-  # Global config for browserslist, that tools like Autoprefixer are going to need to correctly process your code to be cross-browser compliant. (https://evilmartians.com/chronicles/evil-front-part-1)
-  "> 1%"
-end
-
 insert_into_file 'config/application.rb', after: 'config.load_defaults 5.2' do
   <<-GENERATOR_CONFIGS
 
@@ -18,7 +12,7 @@ insert_into_file 'config/application.rb', after: 'config.load_defaults 5.2' do
 
 end
 
-run 'yarn add @rails/webpacker@^4.0.0-pre.3 webpack-cli rails-ujs turbolinks stimulus babel-minify'
+run 'yarn add @rails/webpacker@^4.0.0-rc.7 webpack-cli rails-ujs turbolinks stimulus @fortawesome/fontawesome-free tailwindcss'
 
 run 'yarn upgrade webpack-dev-server --latest'
 # run 'yarn install'
@@ -34,12 +28,12 @@ run 'yarn upgrade webpack-dev-server --latest'
 # update version of node on server
 
 append_to_file 'config/webpack/environment.js' do
-  <--POSTCSS_LOADER
-const path = require("path")
-Object.assign(environment.loaders.get("css").use.find(el => el.loader === "postcss-loader").options, {
-  config: {
-    path: path.resolve(__dirname, "../..", ".postcssrc.yml")
-  }
-})
-POSTCSS_LOADER
+  <<-POSTCSS_LOADER
+  const path = require("path")
+  Object.assign(environment.loaders.get("css").use.find(el => el.loader === "postcss-loader").options, {
+    config: {
+      path: path.resolve(__dirname, "../..", ".postcssrc.yml")
+    }
+  })
+  POSTCSS_LOADER
 end
