@@ -17,20 +17,20 @@
       = link_to about_path do
         .statement= "© 2019 - Copyright - #{t :sitename}"
         / .all-rights-reserved= "All Rights Reserved"
-  .foot-social
-    .social-links
-      = link_to twitter_path, target: '_blank' do
-        .social
-          %i.fab.fa-twitter
-      = mail_to 'host@app_name', subject: 'A message to ye from ye old site' do
-        .social
-          %i.fas.fa-envelope
-      .social
-        %i.fas.fa-podcast
-      = link_to github_path, target: '_blank' do
-        .social
-          %i.fab.fa-github
+  -# .foot-social
+  -#   .social-links
+  -#     = link_to twitter_path, target: '_blank' do
+  -#       .social
+  -#         %i.fab.fa-twitter
+  -#     = mail_to 'host@app_name', subject: 'A message to ye from ye old site' do
+  -#       .social
+  -#         %i.fas.fa-envelope
+  -#     .social
+  -#       %i.fas.fa-podcast
+  -#     = link_to github_path, target: '_blank' do
+  -#       .social
+  -#         %i.fab.fa-github
 
-      = link_to linkedin_path, target: '_blank' do
-        .social
-          %i.fab.fa-linkedin-in
+  -#     = link_to linkedin_path, target: '_blank' do
+  -#       .social
+  -#         %i.fab.fa-linkedin-in
