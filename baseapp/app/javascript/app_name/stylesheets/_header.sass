@@ -1,17 +1,30 @@
 header
-  min-height: 3.5rem
-  @apply bg-grey-darker flex flex-wrap items-center justify-center h-auto
+  @apply bg-grey-darker flex flex-col items-center justify-center h-auto w-screen
   a
     @apply text-blue-lightest font-sans no-underline text-xl
   a:hover
     @apply text-blue-lighter no-underline
   @screen sm
-    @apply justify-between
+    @apply justify-between flex-row w-full
 
 .header-logo
-  @apply w-12 h-12 rounded-full ml-4
+  @apply flex flex-row align-middle w-16 h-16
+
+  img
+    @apply w-12 h-12 rounded-full ml-4 my-1 mt-2
+  .sitename
+    @apply my-auto mx-2
 
 .header-links
   @apply flex flex-no-wrap
   a
-    @apply px-4
+    @apply px-2 text-lg
+    @screen sm
+      @apply px-4
+
+.social-links
+  @apply flex flex-row mr-2
+.social
+  @apply flex items-center justify-center text-grey-darker font-semibold border-2 text-xs border-blue rounded-full mx-1 h-8 w-8 bg-blue-lightest
+  &:hover
+    @apply bg-blue-lighter text-white
