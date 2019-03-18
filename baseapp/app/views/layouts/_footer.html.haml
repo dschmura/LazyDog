@@ -1,14 +1,13 @@
-%footer
+%footer.footer
   .footer-logo
-    = link_to image_tag(asset_pack_path('app_name/images/app_name_logo.png'), alt: "#{(t :sitename)} Logo, link to home page.", id: root_path(anchor: 'page-top')), root_path
-    .sitename= link_to (t :sitename), root_path
+    = link_to image_tag(asset_pack_path('media/rails6/images/rails6_logo.png'),alt: "#{(t :sitename)} Logo, link to home page.", id: root_path(anchor: 'page-bottom')), root_path
 
   .footer-links
     .main-links
-      %li= link_to 'About', about_path
-      %li= link_to 'Contact', contact_path
-      %li= link_to 'Privacy', privacy_path
-      -# For Devise
+      = link_to 'About', about_path
+      = link_to 'Contact', contact_path
+      = link_to 'Privacy', privacy_path
+
       -# - if current_user
       -#   = link_to("Log out.", destroy_user_session_path, method: :delete)
       -# - else
@@ -16,22 +15,18 @@
 
     .copyright
       = link_to about_path do
-        .statement= "© 2018 - Copyright - #{t :sitename}"
-        -# .all-rights-reserved= "All Rights Reserved"
+        .statement= "© 2019 - Copyright - #{t :sitename}"
+        / .all-rights-reserved= "All Rights Reserved"
   .foot-social
     .social-links
       = link_to twitter_path, target: '_blank' do
         .social
           %i.fab.fa-twitter
-
-      = mail_to 'dschmura@humbledaisy.com', subject: 'A message to ye from ye old site' do
+      = mail_to 'host@app_name', subject: 'A message to ye from ye old site' do
         .social
-          -# %i.fab.fa-envelope
-          M
-      = link_to podcast_path, target: '_blank' do
-        .social
-          %i.fab.fa-podcast
-
+          %i.fas.fa-envelope
+      .social
+        %i.fas.fa-podcast
       = link_to github_path, target: '_blank' do
         .social
           %i.fab.fa-github

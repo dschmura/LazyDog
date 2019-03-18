@@ -1,11 +1,5 @@
-@import 'variables'
-
 footer
-  @apply pin-b w-full
-  min-height: 4rem
-
-.footer
-  @apply bg-blue-lightest p-2 flex content-center self-center justify-around
+  @apply pin-b w-full bg-blue-lightest p-2 flex content-center self-center justify-around
   @screen sm
     // @apply bg-yellow
   @screen md
@@ -14,7 +8,7 @@ footer
 .footer-logo
   @apply  w-1/4
   img
-    @apply h-16 w-16 rounded-full
+    @apply h-12 w-12 rounded-full
 
 .footer-links
   @apply w-auto flex flex-col content-center self-center justify-center
@@ -32,11 +26,12 @@ footer
       &:hover
         @apply no-underline text-blue
 
-.foot-social
+  .foot-social
   @apply  w-1/4 flex content-center self-center justify-center
 
 .social-links
   @apply flex flex-row mr-2
+
 .social
   @apply flex items-center justify-center text-grey-darker font-semibold border-2 text-xs border-blue rounded-full mx-1 h-8 w-8 bg-blue-lightest
   &:hover
