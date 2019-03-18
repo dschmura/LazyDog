@@ -12,6 +12,14 @@ insert_into_file 'config/application.rb', after: 'config.load_defaults 5.2' do
 
 end
 
+insert_into_file 'webpacker.yml', after: 'public_output_path: packs-test\n' do
+<<-ADD_STAGING_ENVIRONMENT
+  staging:
+    <<: *default
+
+ADD_STAGING_ENVIRONMENT
+end
+
 run 'yarn add @rails/webpacker@^4.0.0-rc.7 webpack-cli rails-ujs turbolinks stimulus @fortawesome/fontawesome-free'
 
 run 'yarn upgrade webpack-dev-server --latest'
