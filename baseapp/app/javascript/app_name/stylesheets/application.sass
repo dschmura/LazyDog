@@ -1,5 +1,3 @@
-@import 'variables'
-
 @tailwind preflight
 @tailwind components
 @tailwind utilities
@@ -11,12 +9,16 @@ img[alt=""] img:not([alt])
   border: 5px dashed #c00
 
 body
-  @apply flex flex-col h-full
+  @apply flex flex-col min-h-full h-screen
+
+.container
+  @apply bg-green flex flex-col min-h-screen
+
 .content
-  @apply  px-6 py-4 mx-auto -mt-6
+  @apply flex-grow px-2 py-4  h-screen
 
 .debug_dump
-  @apply bg-grey-lighter border border-red-dark rounded-lg p-2 w-2/3 mx-auto
+  @apply bg-grey-lighter border border-red-dark rounded-lg p-2 w-2/3 mx-auto mb-4
 
 /*! debug.css | MIT License | https://gist.github.com/zaydek/6b2e55258734deabbd2b4a284321d6f6 */
 // To use add a {:debug => ""} to any element you want to understand better
@@ -25,4 +27,4 @@ body
 	background: hsla(210, 100%,  50%, 0.5) !important
 	outline: solid 0.25rem hsla(210, 100%, 100%, 0.5) !important
 	box-shadow: none !important
-	filter:     none !impor
+	filter:     none !important
