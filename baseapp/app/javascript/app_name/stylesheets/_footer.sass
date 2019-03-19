@@ -1,14 +1,16 @@
 footer
-  @apply pin-b w-full bg-blue-lightest p-2 flex content-center self-center justify-around
+  @apply pin-b w-full bg-blue-lightest p-2 flex flex-col content-center self-center justify-around
   @screen sm
-    // @apply bg-yellow
+    @apply bg-yellow flex-row
   @screen md
     // @apply bg-green
 
 .footer-logo
-  @apply  w-1/4
+  @apply mx-auto
   img
     @apply h-12 w-12 rounded-full
+  @screen sm
+    @apply w-1/4 mx-0
 
 .footer-links
   @apply w-auto flex flex-col content-center self-center justify-center
