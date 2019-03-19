@@ -12,7 +12,7 @@ insert_into_file 'config/application.rb', after: 'config.load_defaults 5.2' do
 
 end
 
-insert_into_file 'webpacker.yml', after: 'public_output_path: packs-test\n' do
+insert_into_file 'config/webpacker.yml', after: 'public_output_path: packs-test\n' do
 <<-ADD_STAGING_ENVIRONMENT
   staging:
     <<: *default
