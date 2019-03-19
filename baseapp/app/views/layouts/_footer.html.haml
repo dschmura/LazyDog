@@ -1,6 +1,6 @@
 %footer.footer
   .footer-logo
-    = link_to image_tag(asset_pack_path('media/rails6/images/rails6_logo.png'),alt: "#{(t :sitename)} Logo, link to home page.", id: root_path(anchor: 'page-bottom')), root_path
+    = link_to image_tag(asset_pack_path('media/app_name/images/app_name_logo.png'),alt: "#{(t :sitename)} Logo, link to home page.", id: root_path(anchor: 'page-bottom')), root_path
 
   .footer-links
     .main-links
@@ -17,20 +17,3 @@
       = link_to about_path do
         .statement= "© 2019 - Copyright - #{t :sitename}"
         / .all-rights-reserved= "All Rights Reserved"
-  -# .foot-social
-  -#   .social-links
-  -#     = link_to twitter_path, target: '_blank' do
-  -#       .social
-  -#         %i.fab.fa-twitter
-  -#     = mail_to 'host@app_name', subject: 'A message to ye from ye old site' do
-  -#       .social
-  -#         %i.fas.fa-envelope
-  -#     .social
-  -#       %i.fas.fa-podcast
-  -#     = link_to github_path, target: '_blank' do
-  -#       .social
-  -#         %i.fab.fa-github
-
-  -#     = link_to linkedin_path, target: '_blank' do
-  -#       .social
-  -#         %i.fab.fa-linkedin-in

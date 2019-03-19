@@ -1,7 +1,7 @@
 %header
   = link_to root_path do
     .header-logo
-      = image_tag(asset_pack_path('media/rails6/images/rails6_logo.png'), alt: "#{(t :sitename).titleize} Logo, link to home page.", class: 'header-logo', id: root_path(anchor: 'page-top'))
+      = image_tag(asset_pack_path('media/app_name/images/app_name_logo.png'), alt: "#{(t :sitename).titleize} Logo, link to home page.", class: 'header-logo', id: root_path(anchor: 'page-top'))
       .sitename= (t :sitename).titleize
   %nav.header-links
     = link_to "About", about_path
