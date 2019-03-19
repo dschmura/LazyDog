@@ -63,6 +63,10 @@ def add_feedback_mailer
   load_template('add_feedback_mailer.rb')
 end
 
+def add_social_links
+  load_template('add_social_links.rb')
+end
+
 def add_notifications
 end
 
@@ -75,6 +79,7 @@ end
 def add_rspec
   # Bundle and set up RSpec
   run 'bundle exec rails generate rspec:install'
+  run 'guard init'
 end
 
 def add_capistrano
@@ -106,7 +111,6 @@ def customize_configs
   gsub_file 'config/locales/en.yml', "hello: \"Hello world\"", "sitename: \"#{app_name}\""
   gsub_file 'config/environments/production.rb', 'config.assets.js_compressor = :uglifier', '# config.assets.js_compressor = :uglifier'
   # gsub_file 'bin/setup', "# system('bin/yarn')", "system('bin/yarn')"
-
 end
 
 def update_app_name
@@ -179,8 +183,10 @@ after_bundle do
   copy_templates
   customize_configs
   use_tailwindcss
+  add_social_links
   update_app_name
   add_favicon_and_logo
+
   if yes? 'Do you want to add the Official UM color variables? (y/n)'
     add_umich_colors
   end

@@ -1,10 +1,3 @@
-footer
-  @apply pin-b w-full bg-blue-lightest p-2 flex content-center self-center justify-around
-  @screen sm
-    // @apply bg-yellow
-  @screen md
-    // @apply bg-green
-
 .footer-logo
   @apply  w-1/4
   img
@@ -13,7 +6,7 @@ footer
 .footer-links
   @apply w-auto flex flex-col content-center self-center justify-center
   .main-links
-    @apply  content-center self-center justify-center
+    @apply content-center self-center justify-center w-full
     a
       @apply px-3 text-lg text-blue-dark
       &:hover
@@ -22,17 +15,6 @@ footer
         @apply text-sm px-1
   .copyright
     a
-      @apply text-grey-dark text-sm block self-center
+      @apply px-3 text-grey-dark text-sm block w-auto -ml-4
       &:hover
         @apply no-underline text-blue
-
-  .foot-social
-  @apply  w-1/4 flex content-center self-center justify-center
-
-.social-links
-  @apply flex flex-row mr-2
-
-.social
-  @apply flex items-center justify-center text-grey-darker font-semibold border-2 text-xs border-blue rounded-full mx-1 h-8 w-8 bg-blue-lightest
-  &:hover
-    @apply bg-blue-lighter text-white
