@@ -6,7 +6,7 @@ route "get '/linkedin' => redirect('https://www.linkedin.com/in/#{app_name}/')"
 
 append_to_file "app/views/layouts/_footer.html.haml" do
 <<-SOCIAL_LINKS
-  .foot-social
+  .footer-social
     .social-links
       = link_to twitter_path, target: '_blank' do
         .social
@@ -28,9 +28,10 @@ end
 
 append_to_file "app/javascript/#{app_name}/stylesheets/_footer.sass" do
 <<-SOCIAL_LINKS_SASS
+.footer-social
+  @apply  w-1/4 flex content-center self-center justify-center
 .social-links
   @apply flex flex-row mr-2
-
 .social
   @apply flex items-center justify-center text-grey-darker font-semibold border-2 text-xs border-blue rounded-full mx-1 h-8 w-8 bg-blue-lightest
   &:hover
