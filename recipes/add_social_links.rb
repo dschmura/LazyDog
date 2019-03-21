@@ -28,13 +28,14 @@ end
 
 append_to_file "app/javascript/#{app_name}/stylesheets/_footer.sass" do
 <<-SOCIAL_LINKS_SASS
+
 .footer-social
   @apply  w-1/4 flex content-center self-center justify-center
 .social-links
   @apply flex flex-row mr-2
 .social
-  @apply flex items-center justify-center text-grey-darker font-semibold border-2 text-xs border-blue rounded-full mx-1 h-8 w-8 bg-blue-lightest
+  @apply flex items-center justify-center text-gray-700 font-semibold border-2 text-xs border-blue-500 rounded-full mx-1 h-8 w-8 bg-blue-100
   &:hover
-    @apply bg-blue-lighter text-white
+    @apply bg-blue-300 text-white
 SOCIAL_LINKS_SASS
 end
