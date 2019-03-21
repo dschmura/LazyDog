@@ -1,19 +1,19 @@
 #error-explanation
-  @apply bg-blue-lighter text-blue-dark my-1 rounded font-light
+  @apply bg-blue-700 text-blue-800 my-1 rounded font-light
 
   h2
-    @apply bg-red-lighter text-red-dark p-3 rounded-t font-light
+    @apply bg-red-700 text-red-800 p-3 rounded-t font-light
   .error-message
-    @apply text-2xl list-reset leading-loose
+    @apply text-2xl list-none p-0 leading-loose
 
 .flash-messages
-  @apply bg-grey-lighter text-3xl mt-6 mb-4
+  @apply bg-gray-700 text-3xl mt-6 mb-4
 
 .alert
   @apply border-t-4 rounded-b px-4 py-12 h-12 shadow-md flex relative
 
   .alert-close
-    @apply absolute pin-t pin-b pin-r px-2 py-1 no-underline text-2xl
+    @apply absolute top-0 bottom-0 right-0 px-2 py-1 no-underline text-2xl
     &:hover
       @apply cursor-pointer
     svg
@@ -30,27 +30,27 @@
     @apply inline
 
 .alert-edit
-  @apply absolute pin-t pin-r px-2 py-1 mr-6 text-grey-darkest
+  @apply absolute top-0 right-0 px-2 py-1 mr-6 text-gray-800
 
   // COLOR VARIATIONS
 .alert-danger
-  @apply bg-red-lighter text-red-darker border-red p-1 mb-2
+  @apply bg-red-700 text-red-800 border-red-500 p-1 mb-2
   .alert-severity,
   .alert-close
-    @apply border-red text-red-darker
+    @apply border-red-500 text-red-800
 .alert-error
-  @apply bg-yellow-dark text-yellow-darker border-yellow p-1 mb-2
+  @apply bg-yellow-800 text-yellow-700 border-yellow-500 p-1 mb-2
   .alert-severity
-    @apply border-yellow
+    @apply border-yellow-500
 .alert-notice
-  @apply bg-blue-lighter text-blue-darker border-blue p-1 mb-2
+  @apply bg-blue-700 text-blue-800 border-blue-500 p-1 mb-2
   .alert-severity
-    @apply border-blue
+    @apply border-blue-500
 .alert-success
-  @apply bg-green-lighter text-green-darker border-green p-1 mb-2
+  @apply bg-green-700 text-green-700 border-green-500 p-1 mb-2
   .alert-severity
-    @apply border-green
+    @apply border-green-500
 .alert-warning
-  @apply bg-orange-lighter text-orange-darker border-orange p-1 mb-2
+  @apply bg-orange-700 text-orange-700 border-orange-500 p-1 mb-2
   .alert-severity
-    @apply border-orange
+    @apply border-orange-500

@@ -1,6 +1,8 @@
 #  https://www.artmann.co/articles/adding-tailwind-css-to-your-rails-app
-run 'yarn add --dev autoprefixer tailwindcss'
-run './node_modules/.bin/tailwind init app/javascript/css/tailwind.js'
+# run 'yarn add --dev autoprefixer tailwindcss'
+run 'yarn add -D tailwindcss@next'
+
+run './node_modules/.bin/tailwind init app/javascript/css/tailwind.config.js'
 
 insert_into_file 'postcss.config.js', before: "module.exports = {\n" do
   <<-POSTCSS_config
@@ -10,7 +12,7 @@ end
 
 insert_into_file 'postcss.config.js', after: "plugins: [\n" do
   <<-POSTCSS_config
-    tailwindcss('./app/javascript/css/tailwind.js'),
+    tailwindcss('./app/javascript/css/tailwind.config.js'),
     require('autoprefixer'),
   POSTCSS_config
 end
