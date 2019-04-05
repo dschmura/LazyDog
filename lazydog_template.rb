@@ -155,7 +155,7 @@ def add_umich_colors
 end
 
 def add_clear_dev_logs_initializer
-  load_template('clear_dev_logs.rb')
+  load_template('add_clear_dev_logs.rb')
 end
 
 def use_tailwindcss
