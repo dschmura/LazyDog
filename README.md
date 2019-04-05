@@ -6,6 +6,12 @@ If you want to use this template permanently, add the following to your ~/.rails
 ```
 --template=~/code/Rails/TEMPLATES/LazyDog/lazydog_template.rb
 ```
+## DEPENDENCIES
+Redis: if using Sidekiq, you will need Redis
+```
+gem install redis
+```
+
 ## Initial deployment
 
 ### Set up credentials
