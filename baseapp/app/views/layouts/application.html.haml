@@ -16,7 +16,7 @@
       .corner-ribbon.top-right= link_to('Work in Progress', project_status_path)
 
     = render 'layouts/header'
-    .content#content{:class => controller.controller_name}
+    %main.content#content{:class => controller.controller_name}
       = render 'layouts/flash_messages'
       = yield
     = debug(params) if Rails.env.development?

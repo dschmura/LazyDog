@@ -7,7 +7,8 @@ route "get '/linkedin' => redirect('https://www.linkedin.com/in/#{app_name}/')"
 append_to_file "app/views/layouts/_footer.html.haml" do
 <<-SOCIAL_LINKS
   .footer-social
-    .social-links
+    %nav.social-links
+
       = link_to twitter_path, target: '_blank' do
         .social
           %i.fab.fa-twitter

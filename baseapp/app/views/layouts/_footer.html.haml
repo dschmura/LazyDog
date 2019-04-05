@@ -2,7 +2,7 @@
   .footer-logo
     = link_to image_tag(asset_pack_path('media/app_name/images/app_name_logo.png'),alt: "#{(t :sitename)} Logo, link to home page.", id: root_path(anchor: 'page-bottom')), root_path
 
-  .footer-links
+  %nav.footer-links
     .main-links
       = link_to 'About', about_path
       = link_to 'Contact', contact_path
