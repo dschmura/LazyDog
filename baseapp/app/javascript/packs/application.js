@@ -10,6 +10,13 @@ require("channels")
 var Turbolinks = require("turbolinks")
 Turbolinks.start()
 
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
+
+const application = Application.start()
+const context = require.context("../controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))
+
 // Specific frontend applications
 import 'app_name'
 
@@ -26,3 +33,22 @@ require.context('../app_name/images/', true, /.(gif|jpg|jpeg|png|svg)$/)
 document.addEventListener('turbolinks:load', () => {
   // FontAwesome.dom.i2svg();
 })
+
+document.addEventListener('turbolinks:load', () => {
+
+  // FontAwesome.dom.i2svg();
+  function highlightCurrent() {
+    const curPage = document.URL;
+    const links = document.getElementsByTagName('a');
+    for (let link of links) {
+      if (link.href == curPage) {
+        link.classList.add("current");
+      }
+    }
+  }
+
+  highlightCurrent();
+  document.getElementById('nav-toggle').onclick = function () {
+    document.getElementById("nav-content").classList.toggle("hidden");
+  }
+});

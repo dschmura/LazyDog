@@ -34,7 +34,7 @@ run 'yarn upgrade webpack-dev-server --latest'
 # yarn add @fortawesome/fontawesome-free-brands
 # add a staging environment in config/webpacker.yml
 # update version of node on server
-
+run 'rails webpacker:install:stimulus'
 append_to_file 'config/webpack/environment.js' do
   <<-POSTCSS_LOADER
   const path = require("path")
