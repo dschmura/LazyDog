@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Feedback, type: :model do
   subject {
     described_class.new(topic: "Here is a topic", comment: "Anything",
                         email: "tester@example.com")
-   }
+  }
 
   it "is valid with valid attributes" do
     expect(subject).to be_valid
@@ -32,7 +32,7 @@ RSpec.describe Feedback, type: :model do
 
   it "email validation accepts valid addresses" do
     valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
-                     first.last@foo.jp alice+bob@baz.cn]
+                         first.last@foo.jp alice+bob@baz.cn]
     valid_addresses.each do |valid_address|
       subject.email = valid_address
       expect(subject).to be_valid
@@ -47,5 +47,4 @@ RSpec.describe Feedback, type: :model do
       expect(subject).not_to be_valid
     end
   end
-
 end

@@ -26,13 +26,13 @@ insert_into_file 'config/environments/production.rb', after: 'Rails.application.
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              Rails.application.credentials.#{app_name.upcase}_EMAIL_SERVER,
-    domain:               Rails.application.credentials.#{app_name.upcase}_EMAIL_DOMAIN,
-    user_name:            Rails.application.credentials.#{app_name.upcase}_EMAIL_USERNAME,
-    password:             Rails.application.credentials.#{app_name.upcase}_EMAIL_PASSWORD,
-    authentication:       :login,
-    enable_starttls_auto: 'true',
-    port:                 '587'
+    address: Rails.application.credentials.STANDARDRB_EMAIL_SERVER,
+    domain: Rails.application.credentials.STANDARDRB_EMAIL_DOMAIN,
+    user_name: Rails.application.credentials.STANDARDRB_EMAIL_USERNAME,
+    password: Rails.application.credentials.STANDARDRB_EMAIL_PASSWORD,
+    authentication: :login,
+    enable_starttls_auto: "true",
+    port: "587",
   }
 
   PRODUCTION_ENVIRONMENT
