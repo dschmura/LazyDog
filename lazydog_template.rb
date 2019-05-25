@@ -6,7 +6,7 @@ def template_with_env filename
   if ENV['LOCAL']
     "/Users/dschmura/code/Rails/TEMPLATES/LazyDog/recipes" + filename
   else
-    "http://github.com/smartlogic/rails-templates/raw/master/" + filename
+    "https://github.com/dschmura/LazyDog/recipes" + filename
   end
 end
 
@@ -187,9 +187,9 @@ after_bundle do
   update_app_name
   add_favicon_and_logo
 
-  if yes? 'Do you want to add the Official UM color variables? (y/n)'
-    add_umich_colors
-  end
+  # if yes? 'Do you want to add the Official UM color variables? (y/n)'
+  #   add_umich_colors
+  # end
   config_missing_translations
 
   run 'bin/setup'
