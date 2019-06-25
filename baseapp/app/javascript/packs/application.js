@@ -23,13 +23,13 @@ import 'app_name/stylesheets/ribbons.sass'
 import '@fortawesome/fontawesome-free/js/all';
 require.context('../app_name/images/', true, /.(gif|jpg|jpeg|png|svg)$/)
 
-document.addEventListener('turbolinks:load', () => {
-  // FontAwesome.dom.i2svg();
-})
+// require('trix')
+// require('@rails/actiontext')
+// import 'trix/dist/trix.css'
 
 document.addEventListener('turbolinks:load', () => {
 
-  // FontAwesome.dom.i2svg();
+  FontAwesome.dom.i2svg();
   function highlightCurrent() {
     const curPage = document.URL;
     const links = document.getElementsByTagName('a');
@@ -45,3 +45,5 @@ document.addEventListener('turbolinks:load', () => {
     document.getElementById("nav-content").classList.toggle("hidden");
   }
 });
+
+import "controllers"

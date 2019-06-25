@@ -1,33 +1,23 @@
-@import 'variables'
+
 /* The ribbons
 
 .corner-ribbon
   width: 300px
-  background: #e43
-  position: absolute
   top: 45px
   left: -50px
-  text-align: center
-  line-height: 50px
-  letter-spacing: 1px
-  color: #f0f0f0
   transform: rotate(-45deg)
   -webkit-transform: rotate(-45deg)
-  z-index: 0
-  a
-    color: #f0f0f0
-    a:hover
-      color: grey
+  @apply bg-red-700 absolute tracking-wide text-center text-white py-2 text-xl w-full max-w-xs z-0 bg-local
+  &:hover
+    @apply text-gray-100 bg-red-800
 /* Custom styles
-
 .corner-ribbon.sticky
-  position: fixed
+  @apply fixed
 
 .corner-ribbon.shadow
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3)
+  @apply shadow-lg
 
 /* Different positions
-
 .corner-ribbon.top-left
   top: 140px
   left: -80px
@@ -35,7 +25,7 @@
   -webkit-transform: rotate(-45deg)
 
 .corner-ribbon.top-right
-  top: 120px
+  top: 60px
   right: -80px
   left: auto
   transform: rotate(45deg)
