@@ -1,3 +1,5 @@
+# require "fileutils"
+
 def source_paths
   Array(super) + [File.join(File.expand_path(File.dirname(__FILE__)),'recipes')] + [File.join(File.expand_path(File.dirname(__FILE__)),'baseapp')]
 
@@ -6,9 +8,28 @@ def template_with_env filename
   if ENV['LOCAL']
     "/Users/dschmura/code/Rails/TEMPLATES/LazyDog/recipes" + filename
   else
-    "https://github.com/dschmura/LazyDog/recipes" + filename
+    "https://github.com/dschmura/LazyDog/recipes/" + filename
   end
 end
+
+# def add_template_repository_to_source_path
+#   if __FILE__ =~ %r{\Ahttps?://}
+#     require "tmpdir"
+#     source_paths.unshift(tempdir = Dir.mktmpdir("lazydog-"))
+#     at_exit { FileUtils.remove_entry(tempdir) }
+#     git clone: [
+#       "--quiet",
+#       "https://github.com/dschmura/lazydog.git",
+#       tempdir
+#     ].map(&:shellescape).join(" ")
+
+#     if (branch = __FILE__[%r{lazydog/(.+)/template.rb}, 1])
+#       Dir.chdir(tempdir) { git checkout: branch }
+#     end
+#   else
+#     source_paths.unshift(File.dirname(__FILE__))
+#   end
+# end
 
 # Loads templates from the recipes/ directory (located in the same directory as this template).
 # This allows us to load templates in the form: load_template('rails_flash_messages.rb')
@@ -161,6 +182,10 @@ end
 def use_tailwindcss
   load_template('use_tailwindcss.rb')
 end
+
+def add_working_files
+  load_template('add_working_files.rb')
+end
 # Main setup
 # add_gems
 copy_file '../baseapp/Gemfile', 'Gemfile', force: true
@@ -196,7 +221,7 @@ after_bundle do
   # Migrations must be done before this
   # add_administrate
   add_clear_dev_logs_initializer
-
+  add_working_files
   git :init
   append_to_file '.gitignore' do ".DS_Store" end
   git add: "."
