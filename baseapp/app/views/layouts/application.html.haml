@@ -11,11 +11,12 @@
     - if content_for? :head
       = yield :head
 
-  %body
+  %body{'data-environment' => Rails.env}
     #page-top
     - unless Rails.env.production?
       .corner-ribbon.top-right= link_to('Work in Progress', project_status_path)
 
+      = render 'layouts/tailwind_breakpoints'
     = render 'layouts/header'
     %main.content#content{:class => controller.controller_name}
       = render 'layouts/flash_messages'

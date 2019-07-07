@@ -3,7 +3,7 @@
     .flex.justify-between.px-4.py-3.xl:w-72.xl:justify-center.xl:py-5
       %div
         = link_to root_path, class: 'flex flex-row  ' do
-          = image_tag(asset_pack_path('media/newhead/images/newhead_logo.png'), alt: "#{(t :sitename).titleize} Logo, link to home page.", class: 'header-logo h-16 w-16', id: root_path(anchor: 'page-top'))
+          = image_tag(asset_pack_path('media/app_name/images/app_name_logo.png'), alt: "#{(t :sitename).titleize} Logo, link to home page.", class: 'header-logo h-16 w-16', id: root_path(anchor: 'page-top'))
           .sitename.self-center.ml-3.text-3xl.text-white.font-light= (t :sitename).titleize
 
       .header-toggle
@@ -14,7 +14,7 @@
           %svg.fill-current.hidden{:viewbox => "0 0 320 512", :xmlns => "http://www.w3.org/2000/svg", "data-target" => "toggle.mainnav"}
             %path{:d => "M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"}
 
-    %nav.header-nav{:class => "hidden", "data-target" => "toggle.mainnav"}
+    %nav.header-nav.hidden{ "data-target" => "toggle.mainnav" }
       .header-links
         .header-link
           = link_to "About Us", about_path

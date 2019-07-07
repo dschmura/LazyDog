@@ -21,7 +21,8 @@
     @apply text-white
   &:focus
     @apply outline-none text-white
-
+  svg
+    @apply h-6 w-6
 
 .header-nav
   @apply text-white border-t border-gray-700
@@ -38,24 +39,28 @@
 
 .header-link
   a
-    @apply block px-3 py-1 rounded font-semibold text-white
+    @apply block px-3 py-1 rounded font-semibold text-white truncate
     &:hover
       @apply bg-gray-800
     @screen sm
       @apply text-sm px-2
+    @screen md
+      @apply text-2xl font-light px-4
     @screen xl
       @apply text-gray-900
         &:hover
           @applybg-gray-200
 
 .user-actions
-  @apply px-5 py-5
+  @apply px-5 py-5 border-t border-gray-300 mt-2
   @screen sm
-    @apply py-0 ml-4 px-0 justify-end
+    @apply py-0 ml-4 px-0 justify-end border-none
 
 .user-action-links
   a
-    @apply mt-3 block
+    @apply mt-3 block text-blue-100
+    &:hover
+      @apply text-blue-300
   @screen sm
     @apply hidden
 
