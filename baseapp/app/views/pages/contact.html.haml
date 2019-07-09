@@ -1,24 +1,27 @@
-.text-center.contact-us--form
-  %h3.heading-style-1.text-center.text-uppercase.text-weight-normal
-    Contact Us
-  = form_with model: @feedback, class: 'contact-us-page--form' do |f|
+%h1 Contact Us
+%p.pb-4.border-b.border-blue-800.mb-4 Feel free to reach out with any suggestions or questions you might have about the app_name application.
 
-    .form-group
-      = notice
-      = @feedback.errors.full_messages.join(', ')
+= form_with model: @feedback, class: 'feedback-form w-full max-w-2xl mx-auto' do |f|
+  .flex.flex-wrap.-mx-3.mb-6
+    .w-full.px-3.mb-6
 
-    .form-group
-      = f.text_field :full_name, placeholder: 'Full Name'
+      %label{:for => "grid-full-name"}
+        Your Name
+      = f.text_field :full_name, placeholder: 'Full Name', class: "form-input feedback-name"
+    .w-full.px-3.mb-6
 
-    .form-group
-      = f.email_field :email, placeholder: 'email@somewhere.com', required: true
+      %label{:for => "grid-full-name"}
+        Your Email
+      = f.text_field :email, placeholder: 'username@email_provider.com', class: "form-input feedback-email"
 
-    .form-group
-      = f.label :topic, 'Topic', :class => "control-label"
-      = f.select(:topic, options_for_select([['I have some feedback...','feedback'],['I have a question...', 'question'],['I have a feature request...','feature'],['I’d like to report a bug...','bug'],['Other','other']],1))
+    .px-3
+      %label{:for => "grid-topic"}
+        Topic
+      = f.select( :topic,    options_for_select([['I have some feedback...','feedback'],['I have a question...', 'question'],['I have a feature request...','feature'],['I’d like to report a bug...','bug'],['Other','other']],1), { },  {:class => 'form-select'})
 
-    .form-group
-      = f.text_area :comment, placeholder: 'What is on your mind?', required: true
-
-    .form-group
-      = f.submit :submit, :class => "btn btn-success"
+  .flex.flex-wrap
+    %label{:for => "grid-message"}
+      Message
+    = f.text_area :comment, placeholder: 'What is on your mind?', required: true, class: "form-textarea feedback-message"
+  .flex.justify-end
+    = f.submit :submit, :class => "feedback-submit"

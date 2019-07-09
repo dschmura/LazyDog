@@ -18,6 +18,7 @@ import 'app_name/stylesheets/application.sass'
 import 'app_name/stylesheets/_header.sass'
 import 'app_name/stylesheets/_flash_errors.sass'
 import 'app_name/stylesheets/_footer.sass'
+import 'app_name/stylesheets/_feedback.sass'
 import 'app_name/stylesheets/ribbons.sass'
 
 import '@fortawesome/fontawesome-free/js/all';

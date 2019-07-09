@@ -1,6 +1,9 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   theme: {
+    extend: {},
     colors: {
+
       transparent: 'transparent',
 
       black: '#000',
@@ -108,40 +111,76 @@ module.exports = {
         900: '#702459',
       },
     },
-    // customForms: theme => ({
-    //   default: {
-    //     input: {
-    //       borderRadius: theme('borderRadius.lg'),
-    //       backgroundColor: theme('colors.gray.200'),
-    //       '&:focus': {
-    //         backgroundColor: theme('colors.white'),
-    //       }
-    //     },
-    //     select: {
-    //       borderRadius: theme('borderRadius.lg'),
-    //       boxShadow: theme('boxShadow.default'),
-    //     },
-    //     'input, textarea, multiselect, checkbox, radio': {
-    //       backgroundColor: theme('colors.gray.900'),
-    //     },
-    //     checkbox: {
-    //       width: theme('spacing.6'),
-    //       height: theme('spacing.6'),
-    //       '&:checked': {
-    //         iconColor:  theme('colors.yellow.500'),
+    customForms: theme => ({
+      default: {
+        label: {
+          borderRadius: theme('borderRadius.lg'),
+          backgroundColor: theme('colors.gray.200'),
+          display: 'none',
+          '&:focus': {
+            backgroundColor: theme('colors.white'),
+          }
+        },
 
-    //       },
+        'input, textarea, select, multiselect, checkbox, radio': {
+          backgroundColor: theme('colors.blue.100'),
+          borderColor: theme('colors.blue.200'),
+          borderRadius: defaultTheme.borderRadius.default,
 
-    //     }
-    //   }
-    // })
+          '&::placeholder': {
+            color: defaultTheme.colors.gray[600],
+            opacity: '1',
+          },
+          '&:focus': {
+            backgroundColor: theme('colors.yellow.100'),
+            outline: 'none',
+            boxShadow: defaultTheme.boxShadow.outline,
+            borderColor: defaultTheme.colors.blue[400],
+          },
+        },
+        checkbox: {
+          width: theme('spacing.6'),
+          height: theme('spacing.6'),
+          '&:checked': {
+            iconColor:  theme('colors.yellow.500'),
+          },
+        },
+        select: {
+          color: defaultTheme.colors.gray[600],
+          opacity: '1',
+          '&:focus': {
+          },
+        }
+        // textarea: {
+        //   appearance: 'none',
+        //   borderColor: defaultTheme.borderColor.default,
+        //   borderWidth: defaultTheme.borderWidth.default,
+        //   borderRadius: defaultTheme.borderRadius.default,
+        //   paddingTop: defaultTheme.spacing[2],
+        //   paddingRight: defaultTheme.spacing[3],
+        //   paddingBottom: defaultTheme.spacing[2],
+        //   paddingLeft: defaultTheme.spacing[3],
+        //   fontSize: defaultTheme.fontSize.base,
+        //   lineHeight: defaultTheme.lineHeight.normal,
+        //   '&::placeholder': {
+        //     color: defaultTheme.colors.gray[500],
+        //     opacity: '1',
+        //   },
+        //   '&:focus': {
+        //     outline: 'none',
+        //     boxShadow: defaultTheme.boxShadow.outline,
+        //     borderColor: defaultTheme.colors.blue[400],
+        //   },
+        // },
+      }
+    })
+
 
   },
   variants: {
     // Some useful comment
   },
   plugins: [
-    // Some useful comment
-    // require('@tailwindcss/custom-forms')
+    require('@tailwindcss/custom-forms')
   ]
 }
