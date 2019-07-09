@@ -1,22 +1,33 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "mainnav", "filters"]
+  static targets = [ "dropdown",  "mainnav"]
 
-
-  toggle() {
+  mainnavtoggle() {
     event.preventDefault()
     this.mainnavTargets.forEach((el, i) => {
       el.classList.toggle("hidden")
 
     })
   }
-  filtertoggle() {
+
+  dropdowntoggle() {
+    const { clientWidth } = this.element
     event.preventDefault()
-    this.filtersTargets.forEach((el, i) => {
-      el.classList.toggle("hidden")
-    })
-
-
+    if (clientWidth > 640 ){
+      this.dropdownTargets.forEach((el, i) => {
+        el.classList.toggle("hidden")
+      })
+    }
+  }
+  hideuseractions(){
+    const width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+    if (width < 640 ){
+      this.dropdownTargets.forEach((el, i) => {
+        el.classList.add("hidden")
+      })
+    }
   }
 }
