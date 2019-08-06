@@ -1,6 +1,6 @@
 run "mkdir working_files"
 
-insert_into_file "README.md" after: "Things you may want to cover:\n" do
+insert_into_file "README.md", after: "Things you may want to cover:\n" do
   <<-WORKING_FILES_README
 
   ** Working Files Directory
@@ -15,4 +15,4 @@ insert_into_file "README.md" after: "Things you may want to cover:\n" do
   WORKING_FILES_README
 end
 
-append_to_file '.gitignore' do "working_files/" end
+append_to_file '.gitignore' do "working_files/\n" end
