@@ -186,6 +186,10 @@ end
 def add_working_files
   load_template('add_working_files.rb')
 end
+
+def configure_rspec_generators
+  load_template('configure_rspec_generators.rb')
+end
 # Main setup
 # add_gems
 copy_file '../baseapp/Gemfile', 'Gemfile', force: true
@@ -216,6 +220,7 @@ after_bundle do
   #   add_umich_colors
   # end
   config_missing_translations
+  configure_rspec_generators
 
   run 'bin/setup'
   # Migrations must be done before this
