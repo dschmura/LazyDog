@@ -228,5 +228,5 @@ after_bundle do
   git commit: %Q{ -m 'Initial Commit' }
   # Create respitory on github. This requires Hub [https://github.com/github/hub]
   # run 'git create'
-  run 'vsc .'
+  run("vsc .")
 end
