@@ -12,7 +12,7 @@ append_to_file "app/views/layouts/_footer.html.haml" do
       = link_to twitter_path, target: '_blank' do
         .social
           %i.fab.fa-twitter
-      = mail_to 'host@app_name', subject: 'A message to ye from ye old site' do
+      = link_to contact_path do
         .social
           %i.fas.fa-envelope
       .social
