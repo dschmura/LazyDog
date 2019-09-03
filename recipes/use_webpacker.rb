@@ -20,9 +20,9 @@ insert_into_file 'config/webpacker.yml', after: 'public_output_path: packs-test\
 ADD_STAGING_ENVIRONMENT
 end
 
-run 'yarn add @rails/webpacker@^4.0.0-rc.7 webpack-cli rails-ujs turbolinks stimulus @fortawesome/fontawesome-free'
+run 'yarn add turbolinks @fortawesome/fontawesome-free webpack-dev-server --latest'
 
-run 'yarn upgrade webpack-dev-server --latest'
+# run 'yarn upgrade webpack-dev-server --latest'
 # run 'yarn install'
 # run 'yarn add rails-ujs turbolinks stimulus babel-minify'
 # run 'yarn add rails-ujs turbolinks jquery stimulus bourbon bootstrap babel-minify popper.js @fortawesome/fontawesome @fortawesome/fontawesome-free-solid @fortawesome/fontawesome-free-regular @fortawesome/fontawesome-free-brands'
@@ -35,6 +35,7 @@ run 'yarn upgrade webpack-dev-server --latest'
 # add a staging environment in config/webpacker.yml
 # update version of node on server
 run 'rails webpacker:install:stimulus'
+
 append_to_file 'config/webpack/environment.js' do
   <<-POSTCSS_LOADER
   const path = require("path")
