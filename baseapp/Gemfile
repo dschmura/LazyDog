@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.6.3"
+ruby "2.6.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
@@ -12,9 +12,9 @@ gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 3.11"
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 # gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
-gem "webpacker", ">= 4.0.x"
+gem 'webpacker', '~> 4.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.5"
+gem "jbuilder", "~> 2.7"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -43,6 +43,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "web-console", ">= 3.3.0"
   gem "listen", ">= 3.0.5", "< 3.2"
   # Invoke rake tasks on remote server.
   # example use: cap staging    invoke:rake TASK=db:seed
@@ -53,15 +54,10 @@ group :development do
   gem "capistrano-bundler", require: false
   gem "capistrano3-puma",   require: false
   gem "erb2haml"
-  gem "guard-rails", require: false
-  gem "guard-bundler", require: false
-  gem "guard-rspec", require: false
   gem "pry"
   gem "pry-rails"
-  gem "terminal-notifier-guard", require: false
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
-  gem "web-console", ">= 3.3.0"
 end
 
 group :test do

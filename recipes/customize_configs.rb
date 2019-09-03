@@ -1,0 +1,10 @@
+run "mv app/javascript/app_name app/javascript/#{app_name}"
+gsub_file 'app/javascript/packs/application.js', 'app_name', "#{app_name}"
+gsub_file 'config/database.yml', 'app_name', "#{app_name}"
+gsub_file 'config/puma.sample.rb', 'app_name', "#{app_name}"
+gsub_file 'config/nginx.sample.conf', 'app_name', "#{app_name}"
+gsub_file 'config/deploy.rb', 'app_name', "#{app_name}"
+gsub_file 'config/deploy/production.rb', 'PRODUCTION_SERVER_IP', "#{app_name}.com"
+gsub_file 'config/deploy/staging.rb', 'STAGING_SERVER_IP', "#{app_name}.com"
+gsub_file 'config/locales/en.yml', "hello: \"Hello world\"", "sitename: \"#{app_name}\""
+gsub_file 'config/environments/production.rb', 'config.assets.js_compressor = :uglifier', '# config.assets.js_compressor = :uglifier'
