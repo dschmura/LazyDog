@@ -20,7 +20,7 @@ insert_into_file 'config/webpacker.yml', after: 'public_output_path: packs-test\
 ADD_STAGING_ENVIRONMENT
 end
 
-run 'yarn add turbolinks @fortawesome/fontawesome-free webpack-dev-server --latest'
+run 'yarn add turbolinks @fortawesome/fontawesome-free'
 
 # run 'yarn upgrade webpack-dev-server --latest'
 # run 'yarn install'
@@ -36,13 +36,13 @@ run 'yarn add turbolinks @fortawesome/fontawesome-free webpack-dev-server --late
 # update version of node on server
 run 'rails webpacker:install:stimulus'
 
-append_to_file 'config/webpack/environment.js' do
-  <<-POSTCSS_LOADER
-  const path = require("path")
-  Object.assign(environment.loaders.get("css").use.find(el => el.loader === "postcss-loader").options, {
-    config: {
-      path: path.resolve(__dirname, "../..", ".postcssrc.yml")
-    }
-  })
-  POSTCSS_LOADER
-end
+# append_to_file 'config/webpack/environment.js' do
+#   <<-POSTCSS_LOADER
+#   const path = require("path")
+#   Object.assign(environment.loaders.get("css").use.find(el => el.loader === "postcss-loader").options, {
+#     config: {
+#       path: path.resolve(__dirname, "../..", ".postcssrc.yml")
+#     }
+#   })
+#   POSTCSS_LOADER
+# end

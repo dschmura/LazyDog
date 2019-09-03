@@ -4,7 +4,7 @@ run 'yarn add -D tailwindcss@next'
 
 run 'yarn add @tailwindcss/custom-forms'
 
-run './node_modules/.bin/tailwind init app/javascript/css/tailwind.config.js'
+# run './node_modules/.bin/tailwind init app/javascript/css/tailwind.config.js'
 
 insert_into_file 'postcss.config.js', before: "module.exports = {\n" do
   <<-POSTCSS_config
