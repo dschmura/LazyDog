@@ -3,7 +3,9 @@
 run 'yarn add -D tailwindcss@next'
 
 run 'yarn add @tailwindcss/custom-forms'
+run 'yarn add tailwindcss-stimulus-components'
 
+run 'yarn add @fullhuman/postcss-purgecss'
 # run './node_modules/.bin/tailwind init app/javascript/css/tailwind.config.js'
 
 insert_into_file 'postcss.config.js', before: "module.exports = {\n" do
@@ -24,3 +26,24 @@ insert_into_file 'app/javascript/css/tailwind.config.js', after: "plugins: [\n" 
     require('@tailwindcss/custom-forms')
   TAILWINDCSS_CUSTOM_FORMS
   end
+
+
+# append_to_file 'app/javascript/css/tailwind.config.js'  do
+#   <<-TAILWINDCSS_CUSTOM_FORMS
+#   if (process.env.RAILS_ENV === "production" || process.env.RAILS_ENV === "staging" ) {
+#     environment.plugins.push(
+#       require('@fullhuman/postcss-purgecss')({
+#         content: [
+#           './app/**/*.html.erb',
+#           './app/**/*.html.haml',
+#           './app/helpers/**/*.rb',
+#           './app/javascript/**/*.js',
+#           './app/javascript/**/*.vue',
+#           './app/javascript/**/*.sass',
+#         ],
+#         defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
+#       })
+#     )
+#   }
+#   TAILWINDCSS_CUSTOM_FORMS
+#   end

@@ -171,6 +171,14 @@ def use_tailwindcss
   load_template('use_tailwindcss.rb')
 end
 
+def use_devise
+  load_template('use_devise.rb')
+end
+
+def use_omniauth
+  load_template('use_omniauth.rb')
+end
+
 def add_working_files
   load_template('add_working_files.rb')
 end
@@ -187,13 +195,15 @@ after_bundle do
   # add_announcements
   # add_notifications
   # add_multiple_authentication
-  add_feedback_mailer
+
   # add_administrate
   add_capistrano
   add_rspec
   convert_to_haml
+
   add_static_pages
   copy_templates
+  add_feedback_mailer
   customize_configs
   use_tailwindcss
   add_social_links
@@ -203,9 +213,16 @@ after_bundle do
   # if yes? 'Do you want to add the Official UM color variables? (y/n)'
   #   add_umich_colors
   # end
+
+  if yes? 'Do you want single signon?'
+    use_devise
+    use_omniauth
+  end
+
   config_missing_translations
 
   run 'bin/setup'
+  rails_command("db:migrate")
   # Migrations must be done before this
   # add_administrate
   add_clear_dev_logs_initializer
@@ -216,5 +233,5 @@ after_bundle do
   git commit: %Q{ -m 'Initial Commit' }
   # Create respitory on github. This requires Hub [https://github.com/github/hub]
   # run 'git create'
-  run("vsc .")
+  run("vsc")
 end
