@@ -5,7 +5,7 @@ append_to_file 'Capfile'  do
 
   <<-CAPFILE_INSERT
   set :rbenv_type, :user
-  set :rbenv_ruby, '2.5.0'
+  set :rbenv_ruby, '2.6.5'
 
   # Load DSL and Setup Up Stages
   require 'capistrano/setup'
