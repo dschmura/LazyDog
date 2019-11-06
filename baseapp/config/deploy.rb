@@ -74,14 +74,31 @@ namespace :deploy do
     end
   end
 
+  desc "Upload to shared/data"
+  task :upload_data do
+    on roles :app do
+      upload! 'uploads', "#{shared_path}", recursive: true
+    end
+  end
+
   desc "Upload to shared/config"
-  task :upload do
+  task :upload_configs do
     on roles :app do
       upload! "config/master.key",  "#{shared_path}/config/master.key"
       upload! "config/puma.#{:rails_env}.rb", "#{shared_path}/config/puma.rb"
-      upload! "config/nginx.#{:rails_env}.conf", "#{shared_path}/config/nginx.conf"
+      upload! "config/nginx.sample.conf", "#{shared_path}/config/nginx.conf"
     end
   end
+
+  desc "Create symlink for nginx."
+  task :link_nginx do
+    on roles :app do
+      within '/etc/nginx/sites-enabled/' do
+        execute("ln -nfs /home/deployer/apps/mi_locations/current/config/nginx.conf /etc/nginx/sites-enabled/APP_NAME-puma")
+      end
+    end
+  end
+
 
   before :starting,  :check_revision
   # before "deploy:assets:precompile", "deploy:yarn_install"
@@ -100,11 +117,6 @@ task :seed do
   end
 end
 
-# ps aux | grep puma    # Get puma pid
-# kill -s SIGUSR2 pid   # Restart puma
-# kill -s SIGTERM pid   # Stop puma
-## Linked Files & Directories (Default None):
-
 set :linked_files, %w[config/puma.rb config/nginx.conf config/master.key]
-set :linked_dirs,  %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system]
-set :linked_dirs, fetch(:linked_dirs, []).push("public/packs", "node_modules")
+set :linked_dirs,  %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system storage]
+set :linked_dirs, fetch(:linked_dirs, []).push("public/packs", "node_modules", "uploads")
