@@ -1,9 +1,7 @@
 /* The ribbons
 .corner-ribbon
   width: 300px
-  transform: rotate(-45deg)
-  -webkit-transform: rotate(-45deg)
-  @apply bg-red-700 absolute tracking-wide text-center py-2 text-xl w-full max-w-xs z-50 bg-local
+  @apply bg-red-700 absolute tracking-wide text-center py-2 text-xl w-full max-w-xs z-50 bg-local transform -rotate-45
   &:hover
     @apply text-gray-100 bg-red-800
   a
@@ -16,21 +14,13 @@
   @apply shadow-lg
 /* Different positions
 .corner-ribbon.top-left
-  transform: rotate(-45deg)
-  -webkit-transform: rotate(-45deg)
-  @apply fixed left-0  top-0 -ml-20 mt-16
+  @apply fixed left-0  top-0 -ml-20 mt-16 transform -rotate-45
 
 .corner-ribbon.top-right
-  transform: rotate(45deg)
-  -webkit-transform: rotate(45deg)
-  @apply fixed right-0  top-0 -mr-20 mt-16
+  @apply fixed right-0  top-0 -mr-20 mt-16 transform rotate-45
 
 .corner-ribbon.bottom-left
-  transform: rotate(45deg)
-  -webkit-transform: rotate(45deg)
-  @apply fixed left-0  bottom-0 -ml-20 mb-10
+  @apply fixed left-0  bottom-0 -ml-20 mb-10 transform rotate-45
 
 .corner-ribbon.bottom-right
-  transform: rotate(-45deg)
-  -webkit-transform: rotate(-45deg)
-  @apply fixed right-0  bottom-0 -mr-20 mb-10
+  @apply fixed right-0  bottom-0 -mr-20 mb-10 transform -rotate-45
