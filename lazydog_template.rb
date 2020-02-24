@@ -12,24 +12,6 @@ def template_with_env filename
   end
 end
 
-# def add_template_repository_to_source_path
-#   if __FILE__ =~ %r{\Ahttps?://}
-#     require "tmpdir"
-#     source_paths.unshift(tempdir = Dir.mktmpdir("lazydog-"))
-#     at_exit { FileUtils.remove_entry(tempdir) }
-#     git clone: [
-#       "--quiet",
-#       "https://github.com/dschmura/lazydog.git",
-#       tempdir
-#     ].map(&:shellescape).join(" ")
-
-#     if (branch = __FILE__[%r{lazydog/(.+)/template.rb}, 1])
-#       Dir.chdir(tempdir) { git checkout: branch }
-#     end
-#   else
-#     source_paths.unshift(File.dirname(__FILE__))
-#   end
-# end
 
 # Loads templates from the recipes/ directory (located in the same directory as this template).
 # This allows us to load templates in the form: load_template('rails_flash_messages.rb')
