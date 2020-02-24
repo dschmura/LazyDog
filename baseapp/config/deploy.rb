@@ -94,7 +94,7 @@ namespace :deploy do
   task :link_nginx do
     on roles :app do
       within '/etc/nginx/sites-enabled/' do
-        execute("ln -nfs /home/deployer/apps/mi_locations/current/config/nginx.conf /etc/nginx/sites-enabled/APP_NAME-puma")
+        execute("ln -nfs /home/deployer/apps/app_name/current/config/nginx.conf /etc/nginx/sites-enabled/app_name-puma")
       end
     end
   end
