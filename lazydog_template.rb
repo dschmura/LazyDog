@@ -203,8 +203,8 @@ after_bundle do
 
   config_missing_translations
 
-  run 'bin/setup'
   rails_command("db:migrate")
+  run 'bin/setup'
   # Migrations must be done before this
   # add_administrate
   add_clear_dev_logs_initializer
