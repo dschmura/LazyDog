@@ -1,12 +1,6 @@
 #  https://www.artmann.co/articles/adding-tailwind-css-to-your-rails-app
-# run 'yarn add --dev autoprefixer tailwindcss'
-run 'yarn add -D tailwindcss@next'
 
-run 'yarn add @tailwindcss/custom-forms'
-run 'yarn add tailwindcss-stimulus-components'
-
-run 'yarn add @fullhuman/postcss-purgecss'
-# run './node_modules/.bin/tailwind init app/javascript/css/tailwind.config.js'
+run 'yarn add tailwindcss @tailwindcss/custom-forms tailwindcss-stimulus-components @fullhuman/postcss-purgecss'
 
 insert_into_file 'postcss.config.js', before: "module.exports = {\n" do
   <<-POSTCSS_config
