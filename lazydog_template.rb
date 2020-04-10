@@ -202,7 +202,7 @@ after_bundle do
   end
 
   config_missing_translations
-
+  rails_command("db:create")
   rails_command("db:migrate")
   run 'bin/setup'
   # Migrations must be done before this
