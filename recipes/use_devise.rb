@@ -13,7 +13,8 @@ run "bundle install"
 
 run "bundle exec rails generate devise:install"
 run "bundle exec rails generate devise User"
-gsub_file 'config/puma.sample.rb', 'app_name', "#{app_name}"
+gsub_file 'config/puma.staging.rb', 'app_name', "#{app_name}"
+gsub_file 'config/puma.production.rb', 'app_name', "#{app_name}"
 
 
 

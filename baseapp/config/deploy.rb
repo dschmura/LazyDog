@@ -86,7 +86,7 @@ namespace :deploy do
     on roles :app do
       upload! "config/master.key",  "#{shared_path}/config/master.key"
       upload! "config/puma.#{:rails_env}.rb", "#{shared_path}/config/puma.rb"
-      upload! "config/nginx.sample.conf", "#{shared_path}/config/nginx.conf"
+      upload! "config/nginx.#{:rails_env}.conf", "#{shared_path}/config/nginx.conf"
     end
   end
 
