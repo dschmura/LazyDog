@@ -12,13 +12,27 @@ insert_into_file 'config/application.rb', after: 'config.load_defaults 5.2' do
 
 end
 
-insert_into_file 'config/webpacker.yml', after: 'public_output_path: packs-test\n' do
-<<-ADD_STAGING_ENVIRONMENT
-  staging:
-    <<: *default
+file 'config/webpack/staging.js'
+append_to_file 'config/webpack/staging.js' do
+  <<-STAGING_CONFIG
+  process.env.NODE_ENV = process.env.NODE_ENV || 'staging'
 
-ADD_STAGING_ENVIRONMENT
+  const environment = require('./environment')
+
+  module.exports = environment.toWebpackConfig()
+
+  STAGING_CONFIG
 end
+
+insert_into_file 'config/webpacker.yml', after: 'public_output_path: packs-test\n' do
+  <<-ADD_STAGING_ENVIRONMENT
+    staging:
+      <<: *default
+
+  ADD_STAGING_ENVIRONMENT
+end
+
+
 
 run 'yarn add turbolinks @fortawesome/fontawesome-free'
 
@@ -36,13 +50,11 @@ run 'yarn add turbolinks @fortawesome/fontawesome-free'
 # update version of node on server
 run 'rails webpacker:install:stimulus'
 
-# append_to_file 'config/webpack/environment.js' do
-#   <<-POSTCSS_LOADER
-#   const path = require("path")
-#   Object.assign(environment.loaders.get("css").use.find(el => el.loader === "postcss-loader").options, {
-#     config: {
-#       path: path.resolve(__dirname, "../..", ".postcssrc.yml")
-#     }
-#   })
-#   POSTCSS_LOADER
-# end
+append_to_file 'config/webpack/environment.js' do
+  <<-RAILS_UJS_INCLUDE
+  const webpack = require('webpack')
+  environment.plugins.append('Provide', new webpack.ProvidePlugin({
+    Rails: '@rails/ujs'
+  }))
+  RAILS_UJS_INCLUDE
+end
