@@ -1,10 +1,36 @@
-# require "fileutils"
 
-def source_paths
-  Array(super) + [File.join(File.expand_path(File.dirname(__FILE__)),'recipes')] + [File.join(File.expand_path(File.dirname(__FILE__)),'baseapp')]
+require "fileutils"
+require "shellwords"
 
+# Copied from: https://github.com/mattbrictson/rails-template
+# Add this template directory to source_paths so that Thor actions like
+# copy_file and template resolve against our source files. If this file was
+# invoked remotely via HTTP, that means the files are not present locally.
+# In that case, use `git clone` to download them to a local temporary dir.
+def add_template_repository_to_source_path
+  if __FILE__ =~ %r{\Ahttps?://}
+    require "tmpdir"
+    source_paths.unshift(tempdir = Dir.mktmpdir("lazydog-"))
+    at_exit { FileUtils.remove_entry(tempdir) }
+    git clone: [
+      "--quiet",
+      "https://github.com/dschmura/LazyDog.git",
+      tempdir
+    ].map(&:shellescape).join(" ")
+
+    if (branch = __FILE__[%r{lazydog/(.+)/lazydog_template.rb}, 1])
+      Dir.chdir(tempdir) { git checkout: branch }
+    end
+  else
+    Array(super) + [File.join(File.expand_path(File.dirname(__FILE__)),'recipes')] + [File.join(File.expand_path(File.dirname(__FILE__)),'baseapp')]
+  end
 end
-def template_with_env filename
+
+# def source_paths
+#   Array(super) + [File.join(File.expand_path(File.dirname(__FILE__)),'recipes')] + [File.join(File.expand_path(File.dirname(__FILE__)),'baseapp')]
+
+# end
+def env filename
   if ENV['LOCAL']
     "/Users/dschmura/code/Rails/TEMPLATES/LazyDog/recipes" + filename
   else
