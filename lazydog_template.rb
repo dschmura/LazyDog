@@ -103,10 +103,12 @@ end
 def add_multiple_authentication
 end
 
-def add_rspec
-  # Bundle and set up RSpec
-  run 'bundle exec rails generate rspec:install'
-  run 'guard init'
+def use_rspec
+ load_template('use_rspec.rb')
+end
+
+def use_factory_bot
+  load_template('use_factory_bot.rb')
 end
 
 def add_capistrano
