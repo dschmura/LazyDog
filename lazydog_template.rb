@@ -7,13 +7,17 @@ require "shellwords"
 # copy_file and template resolve against our source files. If this file was
 # invoked remotely via HTTP, that means the files are not present locally.
 # In that case, use `git clone` to download them to a local temporary dir.
+# def add_template_repository_to_source_path
+
+
 def add_template_repository_to_source_path
   if __FILE__ =~ %r{\Ahttps?://}
     require "tmpdir"
     source_paths.unshift(tempdir = Dir.mktmpdir("lazydog-"))
+    puts "#{source_paths.unshift(tempdir = Dir.mktmpdir("lazydog-"))}"
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
-      "--quiet",
+      # "--quiet",
       "https://github.com/dschmura/LazyDog.git",
       tempdir
     ].map(&:shellescape).join(" ")
@@ -22,22 +26,21 @@ def add_template_repository_to_source_path
       Dir.chdir(tempdir) { git checkout: branch }
     end
   else
-    Array(super) + [File.join(File.expand_path(File.dirname(__FILE__)),'recipes')] + [File.join(File.expand_path(File.dirname(__FILE__)),'baseapp')]
+    source_paths
   end
 end
 
-# def source_paths
-#   Array(super) + [File.join(File.expand_path(File.dirname(__FILE__)),'recipes')] + [File.join(File.expand_path(File.dirname(__FILE__)),'baseapp')]
+def source_paths
+  Array(super) + [File.join(File.expand_path(File.dirname(__FILE__)),'recipes')] + [File.join(File.expand_path(File.dirname(__FILE__)),'baseapp')]
+end
 
-# end
-def env filename
+def template_with_env filename
   if ENV['LOCAL']
     "/Users/dschmura/code/Rails/TEMPLATES/LazyDog/recipes" + filename
   else
     "https://github.com/dschmura/LazyDog/recipes/" + filename
   end
 end
-
 
 # Loads templates from the recipes/ directory (located in the same directory as this template).
 # This allows us to load templates in the form: load_template('rails_flash_messages.rb')
