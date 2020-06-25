@@ -38,3 +38,13 @@ file '.rspec' unless File.exist?('./.rspec')
 append_to_file '.rspec' do
  ' --require spec_helper'
 end
+
+file "./spec/support/factory_bot.rb"
+append_to_file './spec/support/factory_bot.rb' do
+  <<-CONFIG_RSPEC
+  require 'factory_bot_rails'
+  RSpec.configure do |config|
+    config.include FactoryBot::Syntax::Methods
+  end
+  CONFIG_RSPEC
+end
