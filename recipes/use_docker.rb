@@ -279,7 +279,7 @@ create_file 'config/database.yml' do
   default: &default
     adapter: postgresql
     encoding: unicode
-    host:     database​
+    host:     postgres
     username: postgres
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
     variables:
