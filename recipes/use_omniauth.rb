@@ -30,4 +30,24 @@ insert_into_file "config/initializers/devise.rb", after: "# config.parent_contro
   UPDATE_DEVISE_INITIALIZER
 end
 
+# Trick for redirecting to page user signed in from https://github.com/heartcombo/devise/wiki/How-To:-Redirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update
+insert_into_file "app/controllers/application_controller.rb", after: "ActionController::Base\n" do
+  <<-OMNIAUTH_REDIRECT
+  before_action :store_user_location!, if: :storable_location?
+  OMNIAUTH_REDIRECT
+end
+
+insert_into_file "app/controllers/application_controller.rb", after: "private\n" do
+  <<-OMNIAUTH_REDIRECT
+  def storable_location?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
+
+  def store_user_location!
+    # :user is the scope we are authenticating
+    store_location_for(:user, request.fullpath)
+  end
+  OMNIAUTH_REDIRECT
+end
+
 run "annotate"
