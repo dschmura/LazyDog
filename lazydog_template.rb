@@ -103,6 +103,10 @@ end
 def add_announcements
 end
 
+def use_docker
+  load_template('use_docker.rb')
+end
+
 def add_multiple_authentication
 end
 
@@ -136,9 +140,7 @@ def customize_configs
 end
 
 def update_app_name
-  puts Dir.pwd
-  Dir.glob("app/**/*.*")  {|filename| gsub_file filename, 'app_name', "#{app_name}" }
-  Dir.glob("config/**/*.*")  {|filename| gsub_file filename, 'app_name', "#{app_name}" }
+  puts "REMOVE ME"
 end
 
 def run_certbot
@@ -200,6 +202,7 @@ end
 copy_file '../baseapp/Gemfile', 'Gemfile', force: true
 run 'bundle install'
 after_bundle do
+  add_template_repository_to_source_path
   add_users
   add_bootstrap
   add_rails_flash_messages
@@ -211,7 +214,9 @@ after_bundle do
 
   # add_administrate
   add_capistrano
-  add_rspec
+
+  use_rspec
+  use_factory_bot
   convert_to_haml
 
   add_static_pages
@@ -232,14 +237,20 @@ after_bundle do
     use_omniauth
   end
 
+  if yes? 'Do you want to use Docker? (y/n)'
+    use_docker
+  end
   config_missing_translations
-  rails_command("db:create")
+  add_clear_dev_logs_initializer
+  add_working_files
+
+  rails_command("db:setup")
   rails_command("db:migrate")
   run 'bin/setup'
   # Migrations must be done before this
   # add_administrate
-  add_clear_dev_logs_initializer
-  add_working_files
+
+
   git :init
   append_to_file '.gitignore' do ".DS_Store" end
   git add: "."

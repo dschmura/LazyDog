@@ -210,6 +210,7 @@ create_file 'docker-compose.yml' do
 
     rails:
       <<: *backend
+      command: if [ tmp/pids/server.pid ]; then rm  tmp/pids/server.pid; fi
       command: bundle exec rails server -b 0.0.0.0
       ports:
         - '3000:3000'
@@ -303,4 +304,37 @@ create_file 'config/database.yml' do
 
   EOF
 end
+
+append_to_file ".gitignore" do
+  <<~EOF
+
+# Ignore docker env for production and staging
+.env/production
+.env/staging
+  EOF
+end
+
+create_file '.dockerignore' do
+  <<~EOF
+.DS_Store
+.bin
+.env
+.git
+.gitignore
+.bundleignore
+.bundle
+.byebug_history
+.rspec
+tmp
+log
+test
+config/deploy
+public/packs
+public/packs-test
+node_modules
+yarn-error.log
+working_files/
+  EOF
+end
+
 gsub_file 'config/database.yml', 'app_name', "#{app_name}"
