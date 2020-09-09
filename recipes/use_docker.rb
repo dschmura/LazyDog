@@ -74,77 +74,65 @@ end
 create_file '.dockerenv/Dockerfile' do
   <<~EOF
   ARG RUBY_VERSION
-  FROM ruby:$RUBY_VERSION-slim-buster
+# See explanation below
+FROM ruby:$RUBY_VERSION
 
-  ARG PG_MAJOR
-  ARG NODE_MAJOR
-  ARG BUNDLER_VERSION
-  ARG YARN_VERSION
+ARG PG_MAJOR
+ARG NODE_MAJOR
+ARG BUNDLER_VERSION
+ARG YARN_VERSION
 
-  # Common dependencies
-  RUN apt-get update -qq \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-      build-essential \
-      gnupg2 \
-      curl \
-      less \
-      git \
-    && apt-get clean \
-    && rm -rf /var/cache/apt/archives/* \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && truncate -s 0 /var/log/*log
+# Add PostgreSQL to sources list
+RUN curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
+  && echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
-  # Add PostgreSQL to sources list
-  RUN curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-    && echo 'deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
+# Add NodeJS to sources list
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash -
 
-  # Add NodeJS to sources list
-  RUN curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash -
+# Add Yarn to the sources list
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
 
-  # Add Yarn to the sources list
-  RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+# Install dependencies
+# We use an external Aptfile for that, stay tuned
+COPY .dockerenv/Aptfile /tmp/Aptfile
+RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+    build-essential \
+    postgresql-client-$PG_MAJOR \
+    nodejs \
+    yarn=$YARN_VERSION-1 \
+    $(cat /tmp/Aptfile | xargs) && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    truncate -s 0 /var/log/*log
 
-  # Install dependencies
-  COPY .dockerenv/Aptfile /tmp/Aptfile
-  RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-      libpq-dev \
-      postgresql-client-$PG_MAJOR \
-      nodejs \
-      yarn=$YARN_VERSION-1 \
-      $(cat /tmp/Aptfile | xargs) && \
-      apt-get clean && \
-      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-      truncate -s 0 /var/log/*log
-  # Configure bundler
-  ENV LANG=C.UTF-8 \
-    BUNDLE_JOBS=4 \
-    BUNDLE_RETRY=3
+# Configure bundler and PATH
+ENV LANG=C.UTF-8 \
+  GEM_HOME=/bundle \
+  BUNDLE_JOBS=4 \
+  BUNDLE_RETRY=3
+ENV BUNDLE_PATH $GEM_HOME
+ENV BUNDLE_APP_CONFIG=$BUNDLE_PATH \
+    BUNDLE_BIN=$BUNDLE_PATH/bin
+ENV PATH /app/bin:$BUNDLE_BIN:$PATH
 
-  # Uncomment this line if you store Bundler settings in the project's root
-  # ENV BUNDLE_APP_CONFIG=.bundle
+# Upgrade RubyGems and install required Bundler version
+RUN gem update --system && \
+    gem install bundler:$BUNDLER_VERSION
 
-  # Uncomment this line if you want to run binstubs without prefixing with `bin/` or `bundle exec`
-  ENV PATH /app/bin:$PATH
+# Create a directory for the app code
+RUN mkdir -p /app
 
-  # Upgrade RubyGems and install required Bundler version
-  # See https://github.com/evilmartians/terraforming-rails/pull/24 for discussion
-  RUN gem update --system && \
-      rm /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec && \
-      gem uninstall bundler && \
-      gem install bundler -v $BUNDLER_VERSION
+WORKDIR /app
 
-  # Create a directory for the app code
-  RUN mkdir -p /app
-
-  WORKDIR /app
-
-  COPY Gemfile /app/Gemfile
-  COPY Gemfile.lock /app/Gemfile.lock
-  COPY package.json /app/package.json
-  COPY yarn.lock /app/yarn.lock
-  RUN bundle install && yarn upgrade
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
+RUN bundle config build.nokogiri --use-system-libraries
+RUN bundle check || bundle install
+RUN yarn check || yarn install --check-files
   EOF
 end
 
@@ -152,9 +140,10 @@ end
 # https://www.rubidium.io/templates/docker-development-environment
 create_file 'docker-compose.yml' do
   <<~EOF
-  version: '2.4'
+version: '3.4'
 
-  x-app: &app
+services:
+  app: &app
     build:
       context: .
       dockerfile: ./.dockerenv/Dockerfile
@@ -164,113 +153,97 @@ create_file 'docker-compose.yml' do
         NODE_MAJOR: '14'
         YARN_VERSION: '1.22.4'
         BUNDLER_VERSION: '2.1.4'
-    environment: &env
-      NODE_ENV: ${RAILS_ENV:-development}
-      RAILS_ENV: ${RAILS_ENV:-development}
-    # image: example-dev:1.1.0
+    # image: example-dev:1.0.0
     tmpfs:
       - /tmp
 
-  x-backend: &backend
+  backend: &backend
     <<: *app
     stdin_open: true
     tty: true
     volumes:
       - .:/app:cached
       - rails_cache:/app/tmp/cache
-      - bundle:/usr/local/bundle
+      - bundle:/bundle
       - node_modules:/app/node_modules
       - packs:/app/public/packs
       - .dockerenv/.psqlrc:/root/.psqlrc:ro
       - .dockerenv/.bashrc:/root/.bashrc:ro
 
     environment:
-      <<: *env
-      REDIS_URL: redis://redis:6379/
-      DATABASE_URL: postgres://postgres:postgres@postgres:5432
-      BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
-      WEBPACKER_DEV_SERVER_HOST: webpacker
-      WEB_CONCURRENCY: 1
-      HISTFILE: /app/log/.bash_history
-      PSQL_HISTFILE: /app/log/.psql_history
-      EDITOR: vi
+      - NODE_ENV=development
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - REDIS_URL=redis://redis:6379/
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432
+      - BOOTSNAP_CACHE_DIR=/bundle/bootsnap
+      - WEBPACKER_DEV_SERVER_HOST=webpacker
+      - WEB_CONCURRENCY=1
+      - HISTFILE=/app/log/.bash_history
+      - EDITOR=vi
+
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+      - postgres
+      - redis
 
-  services:
-    runner:
-      <<: *backend
-      command: /bin/bash
-      ports:
-        - '3000:3000'
-        - '3002:3002'
+  runner:
+    <<: *backend
+    command: /bin/bash
+    ports:
+      - '3001:3001'
+      - '3002:3002'
 
-    rails:
-      <<: *backend
-      command: if [ tmp/pids/server.pid ]; then rm  tmp/pids/server.pid; fi
-      command: bundle exec rails server -b 0.0.0.0
-      ports:
-        - '3000:3000'
+  rails:
+    <<: *backend
 
-    sidekiq:
-      <<: *backend
-      command: bundle exec sidekiq -C config/sidekiq.yml
+    command: if [ tmp/pids/server.pid ]; then rm  tmp/pids/server.pid; fi
+    command: bundle exec rails server -b 0.0.0.0
+    ports:
+      - '3000:3000'
 
-    postgres:
-      image: postgres
-      env_file:
-        - .env/development/database
-        - .env/development/web
-      volumes:
-        - .dockerenv/.psqlrc:/root/.psqlrc:ro
-        - postgres:/var/lib/postgresql/data
-        - ./log:/root/log:cached
-        # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      environment:
-        PSQL_HISTFILE: /root/log/.psql_history
-      ports:
-        - 5432
-      healthcheck:
-        test: pg_isready -U postgres -h 127.0.0.1
-        interval: 5s
+  sidekiq:
+    <<: *backend
+    command: bundle exec sidekiq -C config/sidekiq.yml
 
-    redis:
-      image: redis
-      volumes:
-        - redis:/data
-      ports:
-        - 6379
-      healthcheck:
-        test: redis-cli ping
-        interval: 1s
-        timeout: 3s
-        retries: 30
+  postgres:
+    image: postgres
+    volumes:
+      - .psqlrc:/root/.psqlrc:ro
+      - postgres:/var/lib/postgresql/data
+      - ./log:/root/log:cached
+    env_file:
+      - .env/development/database
+    ports:
+      - 5432
 
-    webpacker:
-      <<: *app
-      command: ./bin/webpack-dev-server
-      ports:
-        - '3035:3035'
-      volumes:
-        - .:/app:cached
-        - bundle:/usr/local/bundle
-        - node_modules:/app/node_modules
-        - packs:/app/public/packs
-      environment:
-        <<: *env
-        WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+  redis:
+    image: redis
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
 
-  volumes:
-    postgres:
-    redis:
-    bundle:
-    node_modules:
-    rails_cache:
-    packs:
+  webpacker:
+    <<: *app
+    command: ./bin/webpack-dev-server
+    ports:
+      - '3035:3035'
+    volumes:
+      - .:/app:cached
+      - bundle:/bundle
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
 
+volumes:
+  postgres:
+  redis:
+  bundle:
+  node_modules:
+  rails_cache:
+  packs:
   EOF
 end
 
