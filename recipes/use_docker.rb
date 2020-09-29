@@ -311,3 +311,18 @@ working_files/
 end
 
 gsub_file 'config/database.yml', 'app_name', "#{app_name}"
+
+insert_into_file "config/environments/development.rb", after: "# Settings specified here will take precedence over those in config/application.rb.\n" do
+
+  <<~CONFIG
+
+  # Check if we use Docker to allow docker ip through web-console
+  config.web_console.whitelisted_ips = Socket.ip_address_list.reduce([]) do |res, addrinfo|
+    addrinfo.ipv4? ? res << IPAddr.new(addrinfo.ip_address).mask(24) : res
+  end
+
+
+  CONFIG
+
+
+end
