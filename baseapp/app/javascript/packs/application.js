@@ -10,10 +10,9 @@ require("channels")
 var Turbolinks = require("turbolinks")
 Turbolinks.start()
 
-// Specific frontend applications
-import 'app_name'
+// import 'app_name'
 
-import 'app_name/stylesheets/_variables.sass'
+// Specific frontend applications
 import 'app_name/stylesheets/application.sass'
 import 'app_name/stylesheets/_header.sass'
 import 'app_name/stylesheets/_flash_errors.sass'
